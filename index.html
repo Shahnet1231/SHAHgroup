@@ -1,0 +1,2124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<!-- ╔═══════════════════════════════════════════════════════╗
+     ║  👇 GOOGLE SCRIPT URL YAHAN PASTE KARO — EK BAR     ║
+     ║  content="" ke andar apna URL likhein                ║
+     ╚═══════════════════════════════════════════════════════╝ -->
+<meta name="api-url" content="">
+<title>SHAH Group Business System</title><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f0f4f8;--sf:#fff;--sf2:#f4f7fb;--sb:#0a1628;--sbh:#0f2040;--pr:#0082ff;--prl:#ddf0ff;--prh:#0066cc;--tx:#1a2332;--tx2:#5a7190;--tx3:#94a8be;--bd:#dde8f0;--gr:#0ab437;--grb:#d8f5de;--rd:#dc2626;--rdb:#fee2e2;--or:#ea580c;--orb:#ffedd5;--yw:#d97706;--ywb:#fef3c7;--sh:0 1px 3px rgba(0,0,0,.08);--shm:0 4px 6px rgba(0,0,0,.07);--shl:0 10px 25px rgba(0,0,0,.12);--ra:10px;--ras:6px;--ff:'IBM Plex Sans',sans-serif;--fm:'IBM Plex Mono',monospace;--sw:240px;--th:58px;--tr:.18s ease;
+  --logo-grad:linear-gradient(135deg,#0082ff,#00c896,#0ab437);}
+.dark{--bg:#070f1e;--sf:#0d1b2e;--sf2:#0a1525;--sb:#040b18;--tx:#e2ecf5;--tx2:#7a9ab8;--tx3:#3a5570;--bd:#1a2d45;--prl:#003a70;--grb:#012210;--rdb:#450a0a;--orb:#431407;--ywb:#422006;--sh:0 1px 3px rgba(0,0,0,.3);--shl:0 10px 25px rgba(0,0,0,.4);}
+/* Sidebar active nav item — logo gradient left border */
+.ni.act{background:linear-gradient(90deg,rgba(0,130,255,.15),rgba(10,180,55,.08));color:#fff;border-left-color:#0082ff;}
+/* Topbar gradient line */
+.topbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--logo-grad);}
+.topbar{position:relative;}
+/* Primary button gradient */
+.bp{background:linear-gradient(135deg,#0082ff,#0ab437);color:#fff;border:none;}
+.bp:hover{background:linear-gradient(135deg,#0066cc,#089030);}
+/* Dashboard cards top border */
+.cd.cb .ci{background:linear-gradient(135deg,#ddf0ff,#e0fff0);color:#0082ff;}
+.cd.cg .ci{background:linear-gradient(135deg,#d8f5de,#e0fff0);color:#0ab437;}
+/* Badges green update */
+.bg2{background:#d8f5de;color:#0ab437;}
+/* Active tab */
+.tabb.act{background:var(--logo-grad);color:#fff;border-color:transparent;}
+/* Save button gradient */
+.pf-save{background:var(--logo-grad)!important;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--ff);background:var(--bg);color:var(--tx);font-size:14px;line-height:1.5}
+button,input,select,textarea{font-family:var(--ff)}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:10px}
+#splash{position:fixed;inset:0;background:linear-gradient(135deg,#0f172a 0%,#0a2550 60%,#0f172a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;transition:opacity .7s ease;}
+#splash.hide{opacity:0;pointer-events:none;}
+.spl-wrap{display:flex;align-items:center;gap:0;margin-bottom:32px}
+.spl-txt{display:flex;flex-direction:column;justify-content:center;margin-left:-10px}
+.spl-name{font-family:Arial,sans-serif;font-size:50px;font-weight:800;color:#fff;letter-spacing:2px;opacity:0;transform:translateX(-20px);animation:sln .6s ease forwards;animation-delay:1.6s;}
+.spl-div{height:2px;background:linear-gradient(to right,#0082ff,#00c896,#0ab437);width:0%;animation:sle .5s ease forwards;animation-delay:2.1s;margin-top:6px;}
+.spl-tag{font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,.45);letter-spacing:3px;margin-top:8px;opacity:0;animation:slf .5s ease forwards;animation-delay:2.4s;}
+.spl-sub{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:.1em;opacity:0;animation:slf .5s ease forwards;animation-delay:3s;text-align:center;}
+@keyframes sln{to{opacity:1;transform:translateX(0)}}
+@keyframes sle{to{width:100%}}
+@keyframes slf{to{opacity:1}}
+#ls{position:fixed;inset:0;background:linear-gradient(135deg,#0f172a,#1d4ed8);display:flex;align-items:center;justify-content:center;z-index:9999}
+.lb{background:rgba(255,255,255,.08);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:44px 40px;width:400px;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.ll{width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;overflow:hidden;background:transparent;}
+.lb h1{color:#fff;font-size:24px;font-weight:700;margin-bottom:4px}
+.lb>p{color:rgba(255,255,255,.45);font-size:13px;margin-bottom:24px}
+.lf{margin-bottom:12px}
+.lf input{width:100%;padding:13px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--ras);color:#fff;font-size:14px;outline:none}
+.lf input::placeholder{color:rgba(255,255,255,.3)}
+.lf input:focus{border-color:rgba(255,255,255,.5)}
+.lbt{width:100%;padding:13px;background:var(--pr);color:#fff;border:none;border-radius:var(--ras);font-size:15px;font-weight:700;cursor:pointer;margin-top:6px}
+.lbt:hover{background:var(--prh)}
+.le{color:#f87171;font-size:12px;margin-top:10px;display:none}
+.dh{margin-top:16px}.dh p{color:rgba(255,255,255,.3);font-size:11px;margin-bottom:7px}
+.dbs{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.db{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:4px;padding:3px 9px;font-size:11px;color:rgba(255,255,255,.4);cursor:pointer}
+.db:hover{background:rgba(255,255,255,.18);color:#fff}
+.sb{position:fixed;left:0;top:0;bottom:0;width:var(--sw);background:var(--sb);z-index:100;display:flex;flex-direction:column;transition:width var(--tr);overflow:hidden}
+.sb.col{width:58px}
+.sbh{display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid rgba(255,255,255,.06);min-height:var(--th)}
+.sblo{width:30px;height:30px;min-width:30px;background:var(--pr);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sbbr{overflow:hidden}
+.sbbr strong{color:#fff;font-size:14px;font-weight:700;white-space:nowrap;display:block}
+.sbbr span{color:#60a5fa;font-size:10px;white-space:nowrap}
+.sbtg{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.4);font-size:18px;padding:2px 4px;cursor:pointer;min-width:24px}
+.sbtg:hover{color:#fff}
+.sbn{flex:1;overflow-y:auto;overflow-x:hidden;padding:6px 0}
+.sbn::-webkit-scrollbar{width:0}
+.ns{padding:12px 12px 3px;color:rgba(255,255,255,.22);font-size:10px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.sb.col .ns{visibility:hidden;height:0;padding:0}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 14px;color:rgba(255,255,255,.52);cursor:pointer;transition:all var(--tr);white-space:nowrap;overflow:hidden;border-left:3px solid transparent}
+.ni:hover{background:var(--sbh);color:rgba(255,255,255,.9)}
+.ni.act{background:rgba(29,78,216,.28);color:#fff;border-left-color:var(--pr)}
+.ni.lk{opacity:.25;cursor:not-allowed;pointer-events:none}
+.nic{font-size:17px;min-width:22px;text-align:center;flex-shrink:0}
+.nl{font-size:13px;font-weight:500}
+.sb.col .nl{opacity:0;pointer-events:none}
+.sbft{padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;overflow:hidden}
+.uav{width:32px;height:32px;min-width:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+.un{color:#fff;font-size:13px;font-weight:600;white-space:nowrap}
+.ur{font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700;display:inline-block;margin-top:2px}
+.ra{background:#dc2626;color:#fff}.rm{background:#ea580c;color:#fff}.rc{background:#1d4ed8;color:#fff}.rs{background:#16a34a;color:#fff}
+.sb.col .uinf{display:none}
+.mn{margin-left:var(--sw);transition:margin-left var(--tr);display:flex;flex-direction:column;height:100vh}
+.mn.exp{margin-left:58px}
+.topbar{height:var(--th);background:var(--sf);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;padding:0 18px;box-shadow:var(--sh);flex-shrink:0;z-index:50}
+.pt{font-size:16px;font-weight:700;white-space:nowrap}
+.gsw{flex:1;max-width:420px;position:relative;margin:0 10px}
+.gsi{width:100%;padding:8px 14px 8px 36px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;font-size:13px;color:var(--tx);outline:none}
+.gsi:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--prl)}
+.gsic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--tx3);pointer-events:none}
+.gsd{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--sf);border:1px solid var(--bd);border-radius:var(--ra);box-shadow:var(--shl);max-height:360px;overflow-y:auto;z-index:300;display:none}
+.gsd.on{display:block}
+.gdi{display:flex;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--bd)}
+.gdi:hover{background:var(--sf2)}.gdi:last-child{border-bottom:none}
+.gdn{font-weight:600;font-size:13px}.gdm{font-size:11px;color:var(--tx2)}
+.gdp{margin-left:auto;text-align:right;font-size:11px;white-space:nowrap}
+.tbr{display:flex;align-items:center;gap:6px;margin-left:auto}
+.tbb{padding:6px 10px;background:none;border:1px solid var(--bd);border-radius:var(--ras);color:var(--tx2);font-size:12px;cursor:pointer}
+.tbb:hover{background:var(--sf2);color:var(--tx)}
+.ct{flex:1;overflow-y:auto;padding:20px;padding-bottom:54px}
+.pg{display:none}.pg.act{display:block}
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.ph h2{font-size:18px;font-weight:700;flex:1}
+.cgr{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
+.cd{background:var(--sf);border-radius:var(--ra);padding:18px;box-shadow:var(--sh);border:1px solid var(--bd)}
+.cd:hover{box-shadow:var(--shm)}
+.ci{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+.cl{font-size:12px;color:var(--tx2);font-weight:500;margin-bottom:4px}
+.cv{font-size:22px;font-weight:700;font-family:var(--fm);line-height:1.2}
+.cs{font-size:11px;color:var(--tx3);margin-top:4px}
+.cb .ci{background:var(--prl);color:var(--pr)}.cb .cv{color:var(--pr)}
+.cg .ci{background:var(--grb);color:var(--gr)}.cg .cv{color:var(--gr)}
+.cr .ci{background:var(--rdb);color:var(--rd)}.cr .cv{color:var(--rd)}
+.co .ci{background:var(--orb);color:var(--or)}.co .cv{color:var(--or)}
+.cy .ci{background:var(--ywb);color:var(--yw)}.cy .cv{color:var(--yw)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--ras);font-size:13px;font-weight:600;border:none;cursor:pointer;white-space:nowrap}
+.bp{background:var(--pr);color:#fff}.bp:hover{background:var(--prh)}
+.bg{background:var(--gr);color:#fff}.bg:hover{background:#15803d}
+.br{background:var(--rd);color:#fff}.br:hover{background:#b91c1c}
+.bo{background:none;border:1px solid var(--bd);color:var(--tx)}.bo:hover{background:var(--sf2)}
+.bsm{padding:5px 10px;font-size:12px}
+.tw{background:var(--sf);border-radius:var(--ra);border:1px solid var(--bd);box-shadow:var(--sh);overflow:hidden}
+.tbar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.tbar h3{font-size:14px;font-weight:700;flex:1}
+.tsw{position:relative}.tsw::before{content:"🔍";position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:12px}
+.tsi{padding:6px 10px 6px 26px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;font-size:12px;color:var(--tx);outline:none;width:180px}
+table{border-collapse:collapse;width:100%}
+th{padding:10px 12px;text-align:left;font-size:12px;font-weight:600;color:var(--tx2);border-bottom:1px solid var(--bd);background:var(--sf2);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--bd);font-size:13px;color:var(--tx)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--sf2)}
+.tres{overflow-x:auto}
+.emp{text-align:center;padding:50px 20px;color:var(--tx3)}
+.emp .ei{font-size:48px;margin-bottom:12px}
+.bdg{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.bg2{background:var(--grb);color:var(--gr)}.br2{background:var(--rdb);color:var(--rd)}
+.bo2{background:var(--orb);color:var(--or)}.bb2{background:var(--prl);color:var(--pr)}
+.by2{background:var(--ywb);color:var(--yw)}.bgy{background:var(--sf2);color:var(--tx2)}
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .18s}
+.mov.on{opacity:1;pointer-events:all}
+.mo{background:var(--sf);border-radius:var(--ra);box-shadow:var(--shl);width:100%;max-width:600px;max-height:92vh;overflow-y:auto;transform:translateY(12px);transition:transform .18s}
+.mov.on .mo{transform:none}
+.mlg{max-width:820px}
+.mhd{display:flex;align-items:center;padding:16px 18px;border-bottom:1px solid var(--bd);position:sticky;top:0;background:var(--sf);z-index:2}
+.mhd h3{font-size:15px;font-weight:700;flex:1}
+.mcl{background:none;border:none;font-size:20px;color:var(--tx2);padding:2px 6px;cursor:pointer}
+.mcl:hover{color:var(--rd)}
+.mbd{padding:18px}
+.mft{display:flex;gap:8px;justify-content:flex-end;padding:14px 18px;border-top:1px solid var(--bd)}
+.fgr{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;font-weight:600;color:var(--tx2)}
+.fc{padding:9px 12px;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--ras);font-size:13px;color:var(--tx);outline:none;width:100%}
+.fc:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--prl)}
+.fc::placeholder{color:var(--tx3)}
+textarea.fc{resize:vertical;min-height:70px}
+.ff{grid-column:1/-1}
+.tgl{position:relative;width:42px;height:22px;flex-shrink:0}
+.tgl input{opacity:0;width:0;height:0}
+.tsl{position:absolute;inset:0;background:var(--bd);border-radius:11px;cursor:pointer;transition:.2s}
+.tsl::before{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.2s}
+.tgl input:checked+.tsl{background:var(--gr)}
+.tgl input:checked+.tsl::before{transform:translateX(20px)}
+.trow{display:flex;align-items:center;gap:8px;padding:5px 0;cursor:pointer}
+.trow span{font-size:12px;color:var(--tx2)}
+/* WINDOWS */
+#wdsk{position:fixed;top:var(--th);left:var(--sw);right:0;bottom:46px;pointer-events:none;z-index:200;transition:left .18s}
+#wdsk.exp{left:58px}
+.ew{position:absolute;background:var(--sf);border:1px solid var(--bd);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:hidden;min-width:380px;min-height:200px;pointer-events:all;animation:wop .2s cubic-bezier(.34,1.3,.64,1)}
+@keyframes wop{from{transform:scale(.88) translateY(12px);opacity:0}to{transform:none;opacity:1}}
+.ew.wf{box-shadow:0 20px 60px rgba(0,0,0,.22);z-index:300!important}
+.ew.wm{display:none}
+.ew.wmx{top:4px!important;left:4px!important;width:calc(100% - 8px)!important;height:calc(100% - 8px)!important}
+.wtb{display:flex;align-items:center;gap:8px;padding:0 12px;height:36px;min-height:36px;background:var(--sf2);border-bottom:1px solid var(--bd);cursor:grab;user-select:none;flex-shrink:0}
+.wtb:active{cursor:grabbing}
+.wic{font-size:14px;flex-shrink:0}
+.wlb{flex:1;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wbt{display:flex;gap:6px;flex-shrink:0}
+.wb{width:13px;height:13px;border-radius:50%;border:none;cursor:pointer;font-size:0;display:flex;align-items:center;justify-content:center}
+.wb:hover{filter:brightness(.78)}.wb:hover::after{font-size:9px;font-weight:900;line-height:1}
+.wbmn{background:#f5bf4f}.wbmn:hover::after{content:"–";color:#7a5f00}
+.wbmx{background:#53c22b}.wbmx:hover::after{content:"⤢";color:#1a5200;font-size:8px}
+.wbcl{background:#ff5f56}.wbcl:hover::after{content:"✕";color:#7a0000}
+.wbd{flex:1;overflow:auto;padding:18px}
+/* TASKBAR */
+#tb{position:fixed;bottom:0;left:var(--sw);right:0;height:46px;background:var(--sb);border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:5px;padding:0 8px;z-index:500;transition:left .18s;overflow-x:auto}
+#tb::-webkit-scrollbar{height:0}
+#tb.exp{left:58px}
+.tbst{padding:5px 12px;background:var(--logo-grad);border-radius:6px;color:#fff;font-size:11px;font-weight:700;border:none;cursor:pointer;flex-shrink:0}
+.tbst:hover{background:var(--prh)}
+.tbsp{width:1px;height:22px;background:rgba(255,255,255,.1);flex-shrink:0;margin:0 3px}
+#tbit{display:flex;gap:5px;flex:1;overflow:hidden}
+.tbi{display:flex;align-items:center;gap:5px;padding:4px 9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:5px;cursor:pointer;color:rgba(255,255,255,.6);font-size:11px;white-space:nowrap;max-width:145px;min-width:80px;overflow:hidden;flex-shrink:0}
+.tbi:hover{background:rgba(255,255,255,.14);color:#fff}
+.tbi.tbf{background:rgba(29,78,216,.45);color:#fff;border-color:var(--pr)}
+.tbi.tbmn{opacity:.5}
+.tbcl{color:rgba(255,255,255,.45);font-size:10px;font-family:var(--fm);white-space:nowrap;padding-left:10px;flex-shrink:0;border-left:1px solid rgba(255,255,255,.1);text-align:right;line-height:1.5}
+/* POS LAYOUT */
+.posl{display:grid;grid-template-columns:1fr 360px;gap:14px;height:calc(100vh - var(--th) - 94px)}
+.posa{display:flex;flex-direction:column;gap:10px;overflow:hidden;min-height:0}
+.posb{background:var(--sf);border-radius:var(--ra);border:1px solid var(--bd);display:flex;flex-direction:column;overflow:hidden}
+.possc{background:var(--sf);border-radius:var(--ra);border:1px solid var(--bd);padding:14px}
+.possr{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.posct{flex:1;overflow:hidden;background:var(--sf);border-radius:var(--ra);border:1px solid var(--bd);display:flex;flex-direction:column;min-height:0}
+.posct .tres{flex:1;overflow-y:auto}
+.possum{padding:12px 14px;border-top:1px solid var(--bd);background:var(--sf2);flex-shrink:0}
+.sr{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:13px}
+.sr.gd{font-size:16px;font-weight:700;padding-top:8px;border-top:2px solid var(--bd);margin-top:4px}
+.posch{padding:11px 14px;border-bottom:1px solid var(--bd);font-weight:700;font-size:13px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.poscu{padding:10px 14px;border-bottom:1px solid var(--bd);flex-shrink:0}
+.posac{padding:10px 14px;flex-shrink:0}
+.sgbx{position:absolute;top:100%;left:0;right:0;background:var(--sf);border:1px solid var(--bd);border-radius:var(--ras);box-shadow:var(--shl);z-index:80;max-height:240px;overflow-y:auto;margin-top:2px}
+.si{padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--bd)}
+.si:hover{background:var(--sf2)}.si:last-child{border-bottom:none}
+.sin{font-weight:600;font-size:13px}.sim{font-size:11px;color:var(--tx2);margin-top:2px}
+.sip{float:right;text-align:right;font-size:11px;line-height:1.6}
+.cqty{width:50px;text-align:center;padding:3px;border:1px solid var(--bd);border-radius:4px;font-size:12px;background:var(--sf);color:var(--tx)}
+.crt{width:66px;text-align:right;padding:3px 5px;border:1px solid var(--bd);border-radius:4px;font-size:12px;background:var(--sf);color:var(--tx)}
+.ctot{min-width:62px;text-align:right;font-family:var(--fm);font-size:12px;font-weight:700;color:var(--pr)}
+.cdl{background:none;border:none;color:var(--rd);font-size:15px;padding:2px 4px;cursor:pointer;border-radius:3px}
+.cdl:hover{background:var(--rdb)}
+.svr td{background:rgba(22,163,74,.04)}
+/* DASHBOARD */
+.dg{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:14px}
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.tabb{padding:7px 16px;border:1px solid var(--bd);border-radius:var(--ras);font-size:13px;font-weight:500;background:var(--sf2);color:var(--tx2);cursor:pointer}
+.tabb.act{background:var(--pr);color:#fff;border-color:var(--pr)}
+.tabp{display:none}.tabp.act{display:block}
+/* SCANNER */
+#svid{width:100%;border-radius:var(--ras);background:#000;max-height:280px}
+.scf{position:relative;display:inline-block;width:100%}
+.scf::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:220px;height:140px;border:2px solid #00ff88;border-radius:8px;box-shadow:0 0 0 9999px rgba(0,0,0,.35);pointer-events:none}
+/* LEDGER */
+.ldb{color:var(--rd);font-family:var(--fm)}.lcr{color:var(--gr);font-family:var(--fm)}.lbl{font-weight:700;font-family:var(--fm)}
+/* FOOTER */
+.pgftr{text-align:center;padding:18px 0 4px;font-size:11px;color:var(--tx3);border-top:1px solid var(--bd);margin-top:24px}
+/* PRINT */
+@media print{body>*{display:none!important}#pa{display:block!important;padding:16px}}
+#pa{display:none;font-family:var(--fm);max-width:320px}
+.ph2{text-align:center;margin-bottom:10px}.ph2 h2{font-size:16px;font-weight:700}.ph2 p{font-size:11px;color:#555}
+.pda{border:none;border-top:1px dashed #999;margin:7px 0}
+.ptb{width:100%;font-size:11px}.ptb th,.ptb td{text-align:left;padding:2px 4px}.ptb td:last-child,.ptb th:last-child{text-align:right}
+.pto{display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-top:8px}
+.pft{text-align:center;font-size:10px;color:#777;margin-top:12px}
+@media(max-width:768px){:root{--sw:0px}.sb{transform:translateX(-240px);width:240px}.mn{margin-left:0!important}.posl{grid-template-columns:1fr}.cgr{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head><body>
+<!-- ═══ SPLASH / LOADING SCREEN WITH LOGO ═══ -->
+<div id="splash">
+  <div class="spl-wrap">
+    <canvas id="splCanvas" width="220" height="220"></canvas>
+    <div class="spl-txt">
+      <div class="spl-name">SHAH Group</div>
+      <div class="spl-div"></div>
+      <div class="spl-tag">Management Business System</div>
+    </div>
+  </div>
+  <div class="spl-sub">⚡ Powered By SHAH GROUP</div>
+</div>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="ls">
+<div class="lb">
+  <div class="ll" style="background:transparent;font-size:0">
+    <canvas id="loginCanvas" width="60" height="60"></canvas>
+  </div>
+  <h1>SHAH Group</h1>
+  <p>Business Management System</p>
+  <div class="lf"><input type="text" id="lu" placeholder="Username" value="admin"></div>
+  <div class="lf"><input type="password" id="lp" placeholder="Password" value="Admin123" onkeydown="if(event.key==='Enter')doLogin()"></div>
+  <button class="lbt" onclick="doLogin()">🔐 Sign In</button>
+  <div class="le" id="le"></div>
+  <div style="margin-top:18px;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.05em">⚡ Powered By <strong style="color:rgba(255,255,255,.5)">SHAH GROUP</strong></div>
+</div>
+</div>
+
+<div id="app" style="display:none">
+<nav class="sb" id="sb">
+  <div class="sbh">
+    <canvas id="sbLogo" width="34" height="34" style="min-width:34px;flex-shrink:0;cursor:pointer;border-radius:6px" onclick="WM.open('dashboard')" title="Dashboard"></canvas>
+    <div class="sbbr"><strong>SHAH Group</strong><span id="bizN">Business System</span></div>
+    <button class="sbtg" onclick="toggleSB()">☰</button>
+  </div>
+  <div class="sbn">
+    <div class="ns">Main</div>
+    <div class="ni" data-p="dashboard"><span class="nic">📊</span><span class="nl">Dashboard</span></div>
+    <div class="ni" data-p="pos"><span class="nic">🧾</span><span class="nl">POS Billing</span></div>
+    <div class="ns">Inventory</div>
+    <div class="ni" data-p="items"><span class="nic">📦</span><span class="nl">Items / Products</span></div>
+    <div class="ni" data-p="purchases"><span class="nic">🛒</span><span class="nl">Purchases</span></div>
+    <div class="ni" data-p="sales"><span class="nic">📈</span><span class="nl">Sales History</span></div>
+    <div class="ns">Parties</div>
+    <div class="ni" data-p="customers"><span class="nic">👥</span><span class="nl">Customers</span></div>
+    <div class="ni" data-p="suppliers"><span class="nic">🏭</span><span class="nl">Suppliers</span></div>
+    <div class="ns">Finance</div>
+    <div class="ni" data-p="payments"><span class="nic">💰</span><span class="nl">Payments / Recovery</span></div>
+    <div class="ni" data-p="expenses"><span class="nic">💸</span><span class="nl">Expenses</span></div>
+    <div class="ni" data-p="accounts"><span class="nic">📒</span><span class="nl">Accounts P&amp;L</span></div>
+    <div class="ns">Services</div>
+    <div class="ni" data-p="services"><span class="nic">🛠️</span><span class="nl">Service / Job Card</span></div>
+    <div class="ns">System</div>
+    <div class="ni" data-p="staff"><span class="nic">👨‍💼</span><span class="nl">Staff Management</span></div>
+    <div class="ni" data-p="marketing"><span class="nic">📢</span><span class="nl">Marketing</span></div>
+    <div class="ni" data-p="settings"><span class="nic">⚙️</span><span class="nl">Settings</span></div>
+  </div>
+  <div class="sbft">
+    <div class="uav" id="uav">A</div>
+    <div class="uinf">
+      <div class="un" id="uun">Admin</div>
+      <span class="ur ra" id="uur">Admin</span>
+    </div>
+  </div>
+</nav>
+
+<div class="mn" id="mn">
+  <div class="topbar">
+    <div class="pt" id="pgt">Dashboard</div>
+    <div class="gsw">
+      <span class="gsic">🔍</span>
+      <input class="gsi" id="gsi" placeholder="Search items, barcode, model, company..." oninput="gsearch(this.value)" autocomplete="off">
+      <div class="gsd" id="gsd"></div>
+    </div>
+    <div class="tbr">
+      <button class="tbb" onclick="toggleLang()" id="langBtn">🌐 اردو</button>
+      <button class="tbb" onclick="toggleDark()" id="dkBtn">🌙</button>
+      <button class="tbb" onclick="doLogout()">🚪 Logout</button>
+    </div>
+  </div>
+  <div class="ct" id="ct">
+
+<!-- DASHBOARD -->
+<div class="pg act" id="pg-dashboard">
+  <div class="ph"><h2>📊 Dashboard</h2><button class="btn bo bsm" onclick="loadDash()">🔄</button></div>
+  <div class="cgr">
+    <div class="cd cb"><div class="ci">💰</div><div class="cl">Today Sales</div><div class="cv" id="d1">—</div><div class="cs" id="d1s">—</div></div>
+    <div class="cd cg"><div class="ci">📦</div><div class="cl">Total Stock</div><div class="cv" id="d2">—</div><div class="cs" id="d2s">—</div></div>
+    <div class="cd cr"><div class="ci">🔴</div><div class="cl">Customer Dues</div><div class="cv" id="d3">—</div><div class="cs">Pending recovery</div></div>
+    <div class="cd co"><div class="ci">🏭</div><div class="cl">Supplier Payables</div><div class="cv" id="d4">—</div><div class="cs">To be paid</div></div>
+    <div class="cd cy"><div class="ci">📈</div><div class="cl">Monthly Profit</div><div class="cv" id="d5">—</div><div class="cs" id="d5s">—</div></div>
+    <div class="cd cb"><div class="ci">🛠️</div><div class="cl">Pending Services</div><div class="cv" id="d6">—</div><div class="cs">Open job cards</div></div>
+  </div>
+  <div class="dg">
+    <div class="tw"><div class="tbar"><h3>🧾 Recent Sales</h3></div>
+    <div class="tres"><table><thead><tr><th>Sale ID</th><th>Customer</th><th>Type</th><th>Total</th><th>Paid</th><th>Due</th><th>Date</th></tr></thead>
+    <tbody id="rsl"></tbody></table></div></div>
+    <div class="tw"><div class="tbar"><h3>⚠️ Low Stock</h3></div>
+    <div class="tres"><table><thead><tr><th>Item</th><th>Qty</th><th>Status</th></tr></thead>
+    <tbody id="lst"></tbody></table></div></div>
+  </div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- POS - Template (cloned per window by JS) -->
+<div class="pg" id="pg-pos" style="display:none">
+  <div class="ph"><h2>🧾 POS Billing</h2>
+    <span style="font-size:11px;color:var(--tx2);background:var(--sf2);padding:4px 10px;border-radius:20px;border:1px solid var(--bd)">Enter=Next | F2=New | F4=Save | ESC=Cancel</span>
+  </div>
+  <div class="posl">
+    <div class="posa">
+      <div class="possc">
+        <div class="possr">
+          <div class="fg" style="flex:1;min-width:180px;position:relative">
+            <label>🔍 Item / Barcode</label>
+            <input class="fc pf-search" placeholder="Type name, model or scan barcode..." autocomplete="off" tabindex="1">
+            <div class="pf-sugbox" style="position:relative;z-index:50"></div>
+          </div>
+          <div class="fg" style="width:65px"><label>Qty</label><input class="fc pf-qty" type="number" value="1" min="1" tabindex="2"></div>
+          <div class="fg" style="width:90px"><label>Rate</label><input class="fc pf-rate" type="number" placeholder="Auto" tabindex="3"></div>
+          <div class="fg" style="width:110px"><label>Sale Type</label>
+            <select class="fc pf-stype" tabindex="4"><option>Retail</option><option>Wholesale</option></select>
+          </div>
+          <div class="fg" style="align-self:flex-end"><button class="btn bp bsm pf-additem" tabindex="5">➕ Add</button></div>
+          <div class="fg" style="align-self:flex-end"><button class="btn bo bsm" onclick="openScan()" tabindex="-1">📷</button></div>
+        </div>
+        <div style="border-top:1px solid var(--bd);margin-top:10px;padding-top:10px">
+          <div style="font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:7px">🔧 Add Service Charge</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+            <div class="fg" style="width:120px"><label>Service Type</label>
+              <select class="fc pf-svctype" style="font-size:12px;padding:6px">
+                <option>Repair</option><option>Installation</option><option>Delivery</option><option>Labour</option><option>Other</option>
+              </select>
+            </div>
+            <div class="fg" style="flex:1;min-width:130px"><label>Description</label><input class="fc pf-svcdesc" placeholder="Service details..." style="font-size:12px;padding:6px"></div>
+            <div class="fg" style="width:90px"><label>Amount (Rs.)</label><input class="fc pf-svcamt" type="number" placeholder="0" style="font-size:12px;padding:6px"></div>
+            <button class="btn bg bsm pf-addsvc" style="align-self:flex-end">+ Service</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:18px;margin-top:10px;flex-wrap:wrap">
+          <label class="trow"><span class="tgl"><input type="checkbox" class="pf-quicksale"><span class="tsl"></span></span><span>⚡ Quick Sale (Allow oversell)</span></label>
+          <label class="trow"><span class="tgl"><input type="checkbox" class="pf-combine" checked><span class="tsl"></span></span><span>📄 Combined invoice view</span></label>
+        </div>
+      </div>
+      <div class="posct">
+        <div class="tbar"><h3>🛒 Cart</h3><span class="pf-count" style="font-size:12px;color:var(--tx2)">0 items</span><button class="btn br bsm pf-clear" style="margin-left:auto">🗑️ Clear</button></div>
+        <div class="tres"><table><thead><tr><th>#</th><th>Item / Service</th><th>Type</th><th>Qty</th><th>Rate</th><th>Total</th><th></th></tr></thead>
+        <tbody class="pf-cartbody"><tr><td colspan="7"><div class="emp"><div class="ei">🛒</div><p>Cart empty</p></div></td></tr></tbody></table></div>
+      </div>
+    </div>
+    <div class="posb">
+      <div class="posch"><span>📋 Invoice</span><button class="btn bo bsm pf-newinv">F2 New</button></div>
+      <div class="poscu">
+        <div class="fg" style="margin-bottom:8px;position:relative">
+          <label>Customer</label>
+          <input class="fc pf-custname" placeholder="Search or Walk-in..." autocomplete="off">
+          <div class="pf-custsug" style="position:relative;z-index:60"></div>
+        </div>
+        <input type="hidden" class="pf-custid">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px">
+          <div class="fg"><label>Date</label><input class="fc pf-date" type="date"></div>
+          <div class="fg"><label>Type</label><select class="fc pf-invtype"><option>Retail</option><option>Wholesale</option></select></div>
+        </div>
+        <div class="fg"><label>Notes</label><input class="fc pf-notes" placeholder="Optional..."></div>
+      </div>
+      <div class="possum">
+        <div class="sr"><span>Items Total</span><span class="pf-itotal">Rs. 0</span></div>
+        <div class="sr"><span style="color:var(--gr)">Service Total</span><span class="pf-stotal" style="color:var(--gr)">Rs. 0</span></div>
+        <div class="sr"><span>Discount</span><input type="number" class="pf-disc" value="0" style="width:78px;text-align:right;padding:3px 6px;border:1px solid var(--bd);border-radius:4px;background:var(--sf);color:var(--tx);font-size:12px"></div>
+        <div class="sr gd"><span>Grand Total</span><span class="pf-grand" style="color:var(--pr)">Rs. 0</span></div>
+        <div class="sr" style="margin-top:8px"><label style="font-size:12px;font-weight:600">Paid</label>
+          <input type="number" class="pf-paid" value="0" style="width:108px;text-align:right;padding:5px 8px;border:1px solid var(--bd);border-radius:4px;background:var(--sf);color:var(--tx);font-size:14px;font-weight:700">
+        </div>
+        <div class="sr"><span style="color:var(--rd);font-weight:600">Due</span><span class="pf-due" style="color:var(--rd);font-weight:700">Rs. 0</span></div>
+        <div class="sr"><label style="font-size:12px;font-weight:600">Method</label>
+          <select class="pf-method" style="padding:4px 8px;border:1px solid var(--bd);border-radius:4px;background:var(--sf);color:var(--tx);font-size:12px">
+            <option>Cash</option><option>Bank Transfer</option><option>Credit</option><option>Cheque</option>
+          </select>
+        </div>
+      </div>
+      <div class="posac">
+        <button class="btn bg pf-save" style="width:100%;justify-content:center;padding:12px;font-size:14px;margin-bottom:8px">💾 F4 Save Invoice</button>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button class="btn bo bsm pf-printlast">🖨️ Print Last</button>
+          <button class="btn bo bsm pf-newinv2">🆕 New</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- ITEMS -->
+<div class="pg" id="pg-items">
+  <div class="ph"><h2>📦 Items / Products</h2><span style="font-size:12px;color:var(--tx2);background:var(--sf2);padding:5px 12px;border-radius:20px;border:1px solid var(--bd)">💡 Stock add karne ke liye <strong>Purchases</strong> mein jao</span></div>
+  <div class="tw"><div class="tbar"><h3>All Items</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('itB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Name</th><th>Model</th><th>Company</th><th>Quality</th><th>Supplier</th><th>Stock</th><th>Purchase</th><th>Retail</th><th>Wholesale</th><th>Barcode</th></tr></thead>
+  <tbody id="itB"><tr><td colspan="10"><div class="emp"><div class="ei">📦</div><p>Loading...</p></div></td></tr></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- PURCHASES -->
+<div class="pg" id="pg-purchases">
+  <div class="ph"><h2>🛒 Purchases</h2><button class="btn bp" onclick="openPM()">➕ New Purchase</button></div>
+  <div class="tw"><div class="tbar"><h3>Purchase History</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('purB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>ID</th><th>Date</th><th>Supplier</th><th>Items</th><th>Total</th><th>Paid</th><th>Due</th><th>Status</th></tr></thead>
+  <tbody id="purB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- SALES HISTORY -->
+<div class="pg" id="pg-sales">
+  <div class="ph"><h2>📈 Sales History</h2></div>
+  <div class="tw"><div class="tbar"><h3>All Sales</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('salB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Sale ID</th><th>Date</th><th>Customer</th><th>Type</th><th>Total</th><th>Paid</th><th>Due</th><th>Action</th></tr></thead>
+  <tbody id="salB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- CUSTOMERS -->
+<div class="pg" id="pg-customers">
+  <div class="ph"><h2>👥 Customers</h2><button class="btn bp" onclick="openCM()">➕ Add Customer</button></div>
+  <div class="tw"><div class="tbar"><h3>All Customers</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('cusB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Total Due</th><th>Total Paid</th><th>Actions</th></tr></thead>
+  <tbody id="cusB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- SUPPLIERS -->
+<div class="pg" id="pg-suppliers">
+  <div class="ph"><h2>🏭 Suppliers</h2><button class="btn bp" onclick="openSuM()">➕ Add Supplier</button></div>
+  <div class="tw"><div class="tbar"><h3>All Suppliers</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('supB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Total Due</th><th>Total Paid</th><th>Actions</th></tr></thead>
+  <tbody id="supB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- PAYMENTS -->
+<div class="pg" id="pg-payments">
+  <div class="ph"><h2>💰 Payments / Recovery</h2><button class="btn bp" onclick="openPayM()">➕ Add Payment</button></div>
+  <div class="tw"><div class="tbar"><h3>Payment History</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('payB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Date</th><th>Type</th><th>Party</th><th>Amount</th><th>Method</th><th>Notes</th></tr></thead>
+  <tbody id="payB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- EXPENSES -->
+<div class="pg" id="pg-expenses">
+  <div class="ph"><h2>💸 Expenses</h2><button class="btn bp" onclick="openExpM()">➕ Add Expense</button></div>
+  <div class="tw"><div class="tbar"><h3>All Expenses</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('expB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Date</th><th>Category</th><th>Description</th><th>Amount</th></tr></thead>
+  <tbody id="expB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- ACCOUNTS -->
+<div class="pg" id="pg-accounts">
+  <div class="ph"><h2>📒 Accounts &amp; P&L</h2>
+    <select class="fc" id="plM" onchange="loadPL()" style="width:170px"></select>
+    <button class="btn bo bsm" onclick="loadPL()">🔄</button>
+  </div>
+  <div class="cgr">
+    <div class="cd cg"><div class="ci">💹</div><div class="cl">Total Revenue</div><div class="cv" id="pl1">—</div></div>
+    <div class="cd cb"><div class="ci">📦</div><div class="cl">Cost of Goods</div><div class="cv" id="pl2">—</div></div>
+    <div class="cd cg"><div class="ci">🔧</div><div class="cl">Service Revenue</div><div class="cv" id="pl3">—</div></div>
+    <div class="cd co"><div class="ci">💸</div><div class="cl">Expenses</div><div class="cv" id="pl4">—</div></div>
+    <div class="cd cy"><div class="ci">📈</div><div class="cl">Gross Profit</div><div class="cv" id="pl5">—</div></div>
+    <div class="cd cg"><div class="ci">💰</div><div class="cl">Net Profit</div><div class="cv" id="pl6">—</div><div class="cs" id="pl7">—</div></div>
+  </div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- SERVICES -->
+<div class="pg" id="pg-services">
+  <div class="ph"><h2>🛠️ Service / Job Cards</h2><button class="btn bp" onclick="openSvcM()">➕ New Job Card</button></div>
+  <div class="tw"><div class="tbar"><h3>All Job Cards</h3><div class="tsw"><input class="tsi" placeholder="Search..." oninput="ftb('svcB',this.value)"></div></div>
+  <div class="tres"><table><thead><tr><th>Job ID</th><th>Date</th><th>Customer</th><th>Phone</th><th>Device</th><th>Problem</th><th>Status</th><th>Charges</th><th>Advance</th><th>Due</th><th>Delivery</th><th>Actions</th></tr></thead>
+  <tbody id="svcB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- STAFF -->
+<div class="pg" id="pg-staff">
+  <div class="ph"><h2>👨‍💼 Staff Management</h2><button class="btn bp" onclick="openStfM()">➕ Add Staff</button></div>
+  <div class="cgr" style="grid-template-columns:repeat(4,1fr)">
+    <div class="cd cr"><div class="ci">👑</div><div class="cl">Admin</div><div class="cs">Full access</div></div>
+    <div class="cd co"><div class="ci">👔</div><div class="cl">Manager</div><div class="cs">No Staff/Settings</div></div>
+    <div class="cd cb"><div class="ci">💰</div><div class="cl">Cashier</div><div class="cs">POS, Customers, Payments</div></div>
+    <div class="cd cg"><div class="ci">📦</div><div class="cl">Stock Manager</div><div class="cs">Items, Purchases</div></div>
+  </div>
+  <div class="tw"><div class="tbar"><h3>All Staff</h3></div>
+  <div class="tres"><table><thead><tr><th>Name</th><th>Phone</th><th>Role</th><th>Username</th><th>Access</th><th>Status</th><th>Actions</th></tr></thead>
+  <tbody id="stfB"></tbody></table></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- MARKETING -->
+<div class="pg" id="pg-marketing">
+  <div class="ph"><h2>📢 Marketing</h2>
+    <button class="btn bg bsm" onclick="copyWA()">📱 Copy WhatsApp Numbers</button>
+    <button class="btn bo bsm" onclick="copyEm()">📧 Copy Emails</button>
+  </div>
+  <div class="tw" style="margin-bottom:14px">
+    <div class="tbar"><h3>Customer Database</h3><span id="mktC" style="font-size:12px;color:var(--tx2)"></span></div>
+    <div class="tres"><table><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Total Paid</th><th>Balance Due</th></tr></thead>
+    <tbody id="mktB"></tbody></table></div>
+  </div>
+  <div class="tw"><div class="tbar"><h3>📋 WhatsApp List</h3><button class="btn bo bsm" onclick="cpyBox()">Copy</button></div>
+  <div style="padding:14px"><textarea class="fc" id="waBox" rows="8" readonly placeholder="Click Copy WhatsApp Numbers..."></textarea></div></div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+<!-- SETTINGS -->
+<div class="pg" id="pg-settings">
+  <div class="ph"><h2>⚙️ Settings</h2></div>
+  <div class="tabs">
+    <button class="tabb act" onclick="stab('gen')">🏢 Business</button>
+    <button class="tabb" onclick="stab('api')">🔗 API Setup</button>
+    <button class="tabb" onclick="stab('bkp')">💾 Backup</button>
+    <button class="tabb" onclick="stab('sec')">🔐 Security</button>
+  </div>
+  <div class="tabp act" id="tab-gen">
+    <div class="tw" style="padding:20px;max-width:520px">
+      <h3 style="margin-bottom:14px">Business Information</h3>
+      <div class="fgr" style="grid-template-columns:1fr">
+        <div class="fg"><label>Business Name</label><input class="fc" id="s-bn" placeholder="SHAH Group"></div>
+        <div class="fg"><label>Address</label><input class="fc" id="s-ad"></div>
+        <div class="fg"><label>Phone</label><input class="fc" id="s-ph"></div>
+        <div class="fg"><label>Currency</label><input class="fc" id="s-cu" value="Rs."></div>
+      </div>
+      <button class="btn bp" style="margin-top:14px" onclick="saveSets()">💾 Save</button>
+    </div>
+  </div>
+  <div class="tabp" id="tab-api">
+    <div class="tw" style="padding:20px;max-width:640px">
+      <h3 style="margin-bottom:8px">🔗 Google Apps Script URL</h3>
+      <p style="color:var(--tx2);font-size:13px;margin-bottom:14px">Paste deployed Web App URL. All data saved to Google Sheets.</p>
+      <div class="fg" style="margin-bottom:12px"><label>API URL</label><input class="fc" type="url" id="apiUrl" placeholder="https://script.google.com/macros/s/.../exec"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn bp" onclick="saveApi()">💾 Save URL</button>
+        <button class="btn bo" onclick="testApi()">🧪 Test</button>
+        <button class="btn bo" onclick="initSh()">🗂️ Init Sheets</button>
+      </div>
+      <div id="apiRes" style="margin-top:12px;font-size:13px"></div>
+      <div style="margin-top:18px;background:var(--sf2);border-radius:var(--ras);padding:16px;border:1px solid var(--bd)">
+        <h4 style="margin-bottom:8px;font-size:13px">📋 Setup Guide</h4>
+        <ol style="font-size:12px;color:var(--tx2);line-height:2.4;padding-left:16px">
+          <li>Google Sheets → Extensions → Apps Script</li>
+          <li>Paste <strong>Code.gs</strong> content → Save</li>
+          <li>Deploy → New Deployment → Web App</li>
+          <li>Execute as: <strong>Me</strong> | Access: <strong>Anyone</strong></li>
+          <li>Copy URL → paste above → Save URL</li>
+          <li>Click <strong>Init Sheets</strong> ✅</li>
+          <li>Login: admin / admin123</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="tabp" id="tab-bkp">
+    <div class="tw" style="padding:20px;max-width:500px">
+      <h3 style="margin-bottom:8px">💾 Backup &amp; Restore</h3>
+      <p style="color:var(--tx2);font-size:13px;margin-bottom:16px">Backup download is PIN protected. Enter your 4-digit PIN to download.</p>
+      <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:14px">
+        <div class="fg" style="width:160px">
+          <label>🔐 Enter PIN (4 digits)</label>
+          <input class="fc" type="password" id="bkpPin" maxlength="4" placeholder="••••" style="letter-spacing:6px;font-size:18px;font-weight:700;text-align:center">
+        </div>
+        <button class="btn bg" onclick="dlBkp()">⬇️ Download Backup (.json)</button>
+      </div>
+      <div style="border-top:1px solid var(--bd);padding-top:16px;margin-top:6px">
+        <h4 style="margin-bottom:8px;font-size:13px;color:var(--rd)">⚠️ Restore (overwrites all data)</h4>
+        <div class="fg" style="margin-bottom:10px"><label>Select JSON File</label><input class="fc" type="file" id="bkpF" accept=".json"></div>
+        <div style="display:flex;gap:10px;align-items:flex-end">
+          <div class="fg" style="width:160px">
+            <label>🔐 Confirm PIN</label>
+            <input class="fc" type="password" id="rstPin" maxlength="4" placeholder="••••" style="letter-spacing:6px;font-size:18px;font-weight:700;text-align:center">
+          </div>
+          <button class="btn br" onclick="rstBkp()">🔄 Restore Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabp" id="tab-sec">
+    <div class="tw" style="padding:20px;max-width:520px">
+      <h3 style="margin-bottom:6px">🔐 Security Settings</h3>
+      <p style="color:var(--tx2);font-size:13px;margin-bottom:18px">Change admin password and backup PIN. These are stored securely in your browser.</p>
+
+      <!-- Change Admin Password -->
+      <div style="background:var(--sf2);border-radius:var(--ras);padding:16px;border:1px solid var(--bd);margin-bottom:16px">
+        <h4 style="margin-bottom:12px;font-size:13px;color:var(--tx)">🔑 Change Admin Password</h4>
+        <div class="fgr" style="grid-template-columns:1fr">
+          <div class="fg"><label>Current Password</label><input class="fc" type="password" id="secCurPass" placeholder="Enter current password"></div>
+          <div class="fg"><label>New Password</label><input class="fc" type="password" id="secNewPass" placeholder="Enter new password"></div>
+          <div class="fg"><label>Confirm New Password</label><input class="fc" type="password" id="secConfPass" placeholder="Confirm new password"></div>
+        </div>
+        <button class="btn bp" style="margin-top:12px" onclick="changeAdminPass()">💾 Change Password</button>
+      </div>
+
+      <!-- Change Backup PIN -->
+      <div style="background:var(--sf2);border-radius:var(--ras);padding:16px;border:1px solid var(--bd);margin-bottom:16px">
+        <h4 style="margin-bottom:12px;font-size:13px;color:var(--tx)">📌 Change Backup PIN (4 digits)</h4>
+        <div class="fgr" style="grid-template-columns:1fr">
+          <div class="fg"><label>Current PIN</label><input class="fc" type="password" id="secCurPin" maxlength="4" placeholder="Current 4-digit PIN" style="letter-spacing:4px;font-weight:700"></div>
+          <div class="fg"><label>New PIN</label><input class="fc" type="password" id="secNewPin" maxlength="4" placeholder="New 4-digit PIN" style="letter-spacing:4px;font-weight:700"></div>
+          <div class="fg"><label>Confirm New PIN</label><input class="fc" type="password" id="secConfPin" maxlength="4" placeholder="Confirm PIN" style="letter-spacing:4px;font-weight:700"></div>
+        </div>
+        <button class="btn bp" style="margin-top:12px" onclick="changeBackupPin()">💾 Change PIN</button>
+      </div>
+
+      <!-- Security Info -->
+      <div style="background:var(--rdb);border-radius:var(--ras);padding:12px;border:1px solid var(--rd);font-size:12px">
+        <strong style="color:var(--rd)">🔒 Login Security Rules:</strong>
+        <ul style="margin-top:6px;padding-left:16px;color:var(--tx2);line-height:2">
+          <li>3 wrong attempts → Account locked for <strong>1 minute</strong></li>
+          <li>2 more wrong attempts → Account locked for <strong>15 minutes</strong></li>
+          <li>Backup download always requires 4-digit PIN</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pgftr">⚡ Powered by <strong>SHAH Group Business System</strong></div>
+</div>
+
+  </div></div></div>
+<!-- MODALS -->
+<div class="mov" id="mItem"><div class="mo"><div class="mhd"><h3 id="mIT">Add Item</h3><button class="mcl" onclick="cm('mItem')">✕</button></div>
+<div class="mbd"><input type="hidden" id="eiID">
+<div class="fgr">
+  <div class="fg"><label>Item Name *</label><input class="fc" id="iN"></div>
+  <div class="fg"><label>Model</label><input class="fc" id="iMo"></div>
+  <div class="fg"><label>Company / Brand</label><input class="fc" id="iCo"></div>
+  <div class="fg"><label>Quality</label><input class="fc" id="iQl" placeholder="Original, A-grade..."></div>
+  <div class="fg"><label>Supplier * (Mandatory)</label><select class="fc" id="iSup"><option value="">-- Select Supplier --</option></select></div>
+  <div class="fg"><label>Stock Qty</label><input class="fc" type="number" id="iQt" value="0"></div>
+  <div class="fg"><label>Purchase Rate</label><input class="fc" type="number" id="iPR" placeholder="0"></div>
+  <div class="fg"><label>Retail Rate</label><input class="fc" type="number" id="iRR" placeholder="0"></div>
+  <div class="fg"><label>Wholesale Rate</label><input class="fc" type="number" id="iWR" placeholder="0"></div>
+  <div class="fg"><label>Barcode</label><input class="fc" id="iBR" placeholder="Auto if empty"></div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mItem')">Cancel</button><button class="btn bp" onclick="saveItem()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mCust"><div class="mo"><div class="mhd"><h3 id="mCT">Add Customer</h3><button class="mcl" onclick="cm('mCust')">✕</button></div>
+<div class="mbd"><input type="hidden" id="ecID">
+<div class="fgr">
+  <div class="fg"><label>Name *</label><input class="fc" id="cN"></div>
+  <div class="fg"><label>Phone / WhatsApp</label><input class="fc" id="cPh"></div>
+  <div class="fg"><label>Email</label><input class="fc" id="cEm"></div>
+  <div class="fg ff"><label>Address</label><input class="fc" id="cAd"></div>
+  <div class="fg ff"><label>Notes</label><textarea class="fc" id="cNt" rows="2"></textarea></div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mCust')">Cancel</button><button class="btn bp" onclick="saveCust()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mSup"><div class="mo"><div class="mhd"><h3 id="mST">Add Supplier</h3><button class="mcl" onclick="cm('mSup')">✕</button></div>
+<div class="mbd"><input type="hidden" id="esID">
+<div class="fgr">
+  <div class="fg"><label>Name *</label><input class="fc" id="sN"></div>
+  <div class="fg"><label>Phone</label><input class="fc" id="sPh"></div>
+  <div class="fg"><label>Email</label><input class="fc" id="sEm"></div>
+  <div class="fg ff"><label>Address</label><input class="fc" id="sAd"></div>
+  <div class="fg ff"><label>Notes</label><textarea class="fc" id="sNt" rows="2"></textarea></div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mSup')">Cancel</button><button class="btn bp" onclick="saveSup()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mPur"><div class="mo mlg"><div class="mhd"><h3>🛒 New Purchase</h3><button class="mcl" onclick="cm('mPur')">✕</button></div>
+<div class="mbd">
+<div class="fgr">
+  <div class="fg"><label>Supplier *</label><select class="fc" id="pSup"><option value="">-- Select Supplier --</option></select></div>
+  <div class="fg"><label>Date</label><input class="fc" type="date" id="pDate"></div>
+  <div class="fg ff"><label>Notes</label><input class="fc" id="pNt"></div>
+</div>
+
+<!-- Mode toggle: Existing item OR New item -->
+<div style="margin-top:18px;border-top:1px solid var(--bd);padding-top:14px">
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <button class="tabb act" id="modeNewBtn" onclick="setItemMode('new')">🆕 New Item</button>
+    <button class="tabb" id="modeExistBtn" onclick="setItemMode('exist')">📦 Existing Item</button>
+  </div>
+
+  <!-- NEW ITEM MODE -->
+  <div id="newItemBox">
+    <div style="font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:8px">📋 New Item Details (saari info dalo, item create + stock add ho jayega)</div>
+    <div class="fgr">
+      <div class="fg"><label>Item Name *</label><input class="fc" id="niName" placeholder="e.g., Engine Oil"></div>
+      <div class="fg"><label>Model</label><input class="fc" id="niModel" placeholder="e.g., 5W-30"></div>
+      <div class="fg"><label>Company / Brand</label><input class="fc" id="niCompany" placeholder="e.g., Shell"></div>
+      <div class="fg"><label>Quality</label><input class="fc" id="niQuality" placeholder="Original, A-grade..."></div>
+      <div class="fg"><label>Barcode</label><input class="fc" id="niBarcode" placeholder="Auto if empty"></div>
+      <div class="fg"><label>Retail Sale Rate</label><input class="fc" type="number" id="niRetail" placeholder="0"></div>
+      <div class="fg"><label>Wholesale Rate</label><input class="fc" type="number" id="niWholesale" placeholder="0"></div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-top:10px;background:var(--sf2);padding:10px;border-radius:var(--ras)">
+      <div class="fg" style="width:90px"><label>Qty *</label><input class="fc" type="number" id="niQty" value="1" min="1"></div>
+      <div class="fg" style="width:130px"><label>Purchase Rate *</label><input class="fc" type="number" id="niPurRate" placeholder="0"></div>
+      <button class="btn bp" onclick="addNewItemToPurchase()" style="align-self:flex-end">➕ Add to Purchase</button>
+    </div>
+  </div>
+
+  <!-- EXISTING ITEM MODE -->
+  <div id="existItemBox" style="display:none">
+    <div style="font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:8px">📦 Existing item ka stock badhao</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+      <div class="fg" style="flex:1"><label>Item</label><select class="fc" id="pItm" onchange="setPR()"><option value="">-- Select Item --</option></select></div>
+      <div class="fg" style="width:75px"><label>Qty</label><input class="fc" type="number" id="pQty" value="1" min="1"></div>
+      <div class="fg" style="width:105px"><label>Rate</label><input class="fc" type="number" id="pRate" placeholder="0"></div>
+      <button class="btn bp bsm" onclick="addPI()" style="align-self:flex-end">+ Add</button>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:14px">
+  <div class="tres"><table><thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th><th></th></tr></thead>
+  <tbody id="pIB"><tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:18px">No items added yet</td></tr></tbody></table></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:8px">
+    <div style="font-size:14px;font-weight:700">Total: <span id="pTot" style="color:var(--pr);font-family:var(--fm)">Rs. 0</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <label style="font-size:12px;font-weight:600">Paid:</label>
+      <input class="fc" type="number" id="pPaid" value="0" style="width:120px" oninput="updPur()">
+      <span style="font-size:12px;color:var(--rd)">Due: <strong id="pDue" style="font-family:var(--fm)">Rs. 0</strong></span>
+    </div>
+  </div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mPur')">Cancel</button><button class="btn bg" onclick="savePur()">💾 Save Purchase</button></div>
+</div></div>
+
+<div class="mov" id="mSvc"><div class="mo"><div class="mhd"><h3 id="mSvcT">New Job Card</h3><button class="mcl" onclick="cm('mSvc')">✕</button></div>
+<div class="mbd"><input type="hidden" id="ejID">
+<div class="fgr">
+  <div class="fg"><label>Customer Name *</label><input class="fc" id="jCN"></div>
+  <div class="fg"><label>Phone</label><input class="fc" id="jPh"></div>
+  <div class="fg"><label>Device Type</label><input class="fc" id="jDv" placeholder="Mobile, Laptop, AC..."></div>
+  <div class="fg"><label>Model / Brand</label><input class="fc" id="jMo"></div>
+  <div class="fg ff"><label>Problem Description</label><textarea class="fc" id="jPr" rows="2"></textarea></div>
+  <div class="fg"><label>Status</label><select class="fc" id="jSt"><option>Pending</option><option>In Progress</option><option>Completed</option><option>Delivered</option></select></div>
+  <div class="fg"><label>Delivery Date</label><input class="fc" type="date" id="jDD"></div>
+  <div class="fg"><label>Charges (Rs.)</label><input class="fc" type="number" id="jCh" placeholder="0"></div>
+  <div class="fg"><label>Advance Paid (Rs.)</label><input class="fc" type="number" id="jAd" placeholder="0"></div>
+  <div class="fg ff"><label>Technician Notes</label><textarea class="fc" id="jTN" rows="2"></textarea></div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mSvc')">Cancel</button><button class="btn bp" onclick="saveSvc()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mPay"><div class="mo"><div class="mhd"><h3>Add Payment / Recovery</h3><button class="mcl" onclick="cm('mPay')">✕</button></div>
+<div class="mbd"><div class="fgr">
+  <div class="fg"><label>Type *</label><select class="fc" id="pyTp" onchange="ldPayP()"><option>Customer</option><option>Supplier</option></select></div>
+  <div class="fg"><label>Party *</label><select class="fc" id="pyPt"><option value="">-- Select --</option></select></div>
+  <div class="fg"><label>Amount (Rs.) *</label><input class="fc" type="number" id="pyAm" placeholder="0"></div>
+  <div class="fg"><label>Method</label><select class="fc" id="pyMt"><option>Cash</option><option>Bank Transfer</option><option>Cheque</option><option>Online</option></select></div>
+  <div class="fg"><label>Date</label><input class="fc" type="date" id="pyDt"></div>
+  <div class="fg ff"><label>Notes</label><input class="fc" id="pyNt"></div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mPay')">Cancel</button><button class="btn bg" onclick="savePay()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mExp"><div class="mo"><div class="mhd"><h3>Add Expense</h3><button class="mcl" onclick="cm('mExp')">✕</button></div>
+<div class="mbd"><div class="fgr">
+  <div class="fg"><label>Category</label><select class="fc" id="exCt"><option>Rent</option><option>Salaries</option><option>Utilities</option><option>Transport</option><option>Marketing</option><option>Maintenance</option><option>General</option><option>Other</option></select></div>
+  <div class="fg"><label>Amount *</label><input class="fc" type="number" id="exAm" placeholder="0"></div>
+  <div class="fg"><label>Date</label><input class="fc" type="date" id="exDt"></div>
+  <div class="fg ff"><label>Description</label><input class="fc" id="exDs" placeholder="Expense description"></div>
+</div></div>
+<div class="mft"><button class="btn bo" onclick="cm('mExp')">Cancel</button><button class="btn bp" onclick="saveExp()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mStf"><div class="mo"><div class="mhd"><h3 id="mStfT">Add Staff</h3><button class="mcl" onclick="cm('mStf')">✕</button></div>
+<div class="mbd"><input type="hidden" id="estID">
+<div class="fgr">
+  <div class="fg"><label>Name *</label><input class="fc" id="stN"></div>
+  <div class="fg"><label>Phone</label><input class="fc" id="stPh"></div>
+  <div class="fg"><label>Role</label><select class="fc" id="stRl" onchange="showRI()"><option>Admin</option><option>Manager</option><option>Cashier</option><option>Stock Manager</option></select></div>
+  <div class="fg"><label>Username *</label><input class="fc" id="stUn"></div>
+  <div class="fg"><label>Password</label><input class="fc" type="password" id="stPw" placeholder="Blank = keep current"></div>
+  <div class="fg"><label>Status</label><select class="fc" id="stAc"><option value="true">Active</option><option value="false">Inactive</option></select></div>
+</div>
+<div id="rInfo" style="margin-top:12px;background:var(--sf2);border-radius:var(--ras);padding:12px;border:1px solid var(--bd);font-size:12px;color:var(--tx2)"></div>
+</div>
+<div class="mft"><button class="btn bo" onclick="cm('mStf')">Cancel</button><button class="btn bp" onclick="saveStf()">💾 Save</button></div>
+</div></div>
+
+<div class="mov" id="mLed"><div class="mo mlg"><div class="mhd"><h3 id="mLedT">Ledger</h3><button class="mcl" onclick="cm('mLed')">✕</button></div>
+<div class="mbd">
+  <div class="cgr" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
+    <div class="cd cb"><div class="ci">📊</div><div class="cl">Total Amount</div><div class="cv" id="lt1">—</div></div>
+    <div class="cd cg"><div class="ci">✅</div><div class="cl">Total Paid</div><div class="cv" id="lt2">—</div></div>
+    <div class="cd cr"><div class="ci">🔴</div><div class="cl">Balance Due</div><div class="cv" id="lt3">—</div></div>
+  </div>
+  <div class="tres"><table><thead><tr><th>Date</th><th>Description</th><th>Debit</th><th>Credit</th><th>Balance</th></tr></thead>
+  <tbody id="ledB"></tbody></table></div>
+</div></div></div>
+
+<div class="mov" id="mSD"><div class="mo mlg"><div class="mhd"><h3 id="mSDT">Sale Details</h3><button class="mcl" onclick="cm('mSD')">✕</button></div>
+<div class="mbd" id="mSDB"></div>
+<div class="mft"><button class="btn bo" onclick="window.print()">🖨️ Print</button><button class="btn bo" onclick="cm('mSD')">Close</button></div>
+</div></div>
+
+<div class="mov" id="mScan"><div class="mo" style="max-width:420px"><div class="mhd"><h3>📷 Camera Scanner</h3><button class="mcl" onclick="stopScan()">✕</button></div>
+<div class="mbd" style="padding:12px">
+  <div class="scf"><video id="svid" autoplay playsinline muted></video></div>
+  <canvas id="scanC" style="display:none"></canvas>
+  <div id="scanSt" style="text-align:center;padding:10px;font-size:13px">📷 Point camera at barcode...</div>
+  <div style="font-size:11px;color:var(--tx2);text-align:center">💡 Hardware scanner also works — scan while POS search field is active</div>
+</div></div></div>
+
+<div id="wdsk"></div>
+<div id="tb">
+  <button class="tbst" onclick="WM.open('dashboard')">🏢 SHAH Group</button>
+  <div class="tbsp"></div>
+  <div id="tbit"></div>
+  <div class="tbcl" id="tbc">--:--</div>
+</div>
+<div id="tc"></div>
+<div id="pa">
+  <div class="ph2"><h2 id="p-biz">SHAH Group</h2><p id="p-addr"></p><p id="p-tel"></p></div>
+  <hr class="pda">
+  <div style="display:flex;justify-content:space-between;font-size:12px"><span>Invoice#: <strong id="p-id">—</strong></span><span>Date: <strong id="p-dt">—</strong></span></div>
+  <div style="font-size:12px;margin-top:3px">Customer: <strong id="p-cu">—</strong> | Type: <strong id="p-tp">—</strong></div>
+  <hr class="pda">
+  <table class="ptb"><thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>Total</th></tr></thead><tbody id="p-its"></tbody></table>
+  <hr class="pda">
+  <div class="pto"><span>Grand Total</span><span id="p-gt">—</span></div>
+  <div style="display:flex;justify-content:space-between;font-size:12px;margin-top:4px"><span>Paid: <strong id="p-pd">—</strong></span><span>Due: <strong id="p-du">—</strong></span></div>
+  <div class="pft"><p>Thank you!</p><p id="p-biz2">SHAH Group Business System</p></div>
+</div>
+<script>
+'use strict';
+// ── CONFIG ──
+// ══════════════════════════════════════════════════════════
+// API URL ko file ke TOP mein meta tag se safely lo
+// Wahan sirf URL likhna hota hai — JS syntax ka koi khatra nahi
+// ══════════════════════════════════════════════════════════
+var DEFAULT_API = (document.querySelector('meta[name="api-url"]')||{}).content||'';
+// ══════════════════════════════════════════════════════════
+var API=DEFAULT_API,CU=null,isDk=false,lng='en',CUR='Rs.';
+var BIZ={name:'SHAH Group',addr:'',tel:''};
+var C={items:[],custs:[],sups:[],sales:[],purs:[],svcs:[],stf:[],pays:[],exps:[]};
+var purItems=[], lastSale=null;
+
+// ── ROLES ──
+var ROLES={Admin:['*'],Manager:['dashboard','pos','items','purchases','sales','customers','suppliers','payments','expenses','accounts','services','marketing'],Cashier:['dashboard','pos','customers','payments','services'],'Stock Manager':['dashboard','items','purchases','sales']};
+var RDESC={Admin:'👑 Full access — all modules',Manager:'👔 All except Staff & Settings',Cashier:'💰 Dashboard, POS, Customers, Payments, Services','Stock Manager':'📦 Dashboard, Items, Purchases, Sales'};
+
+function canAcc(p){if(!CU)return false;var a=ROLES[CU.Role]||[];return a.includes('*')||a.includes(p);}
+function applyRoles(){document.querySelectorAll('.ni[data-p]').forEach(function(n){n.classList.toggle('lk',!canAcc(n.getAttribute('data-p')));});}
+
+// ── DEMO USERS ──
+var DU={admin:{StaffID:'S1',Name:'Admin',Role:'Admin',Username:'admin'},manager:{StaffID:'S2',Name:'Manager',Role:'Manager',Username:'manager'},cashier:{StaffID:'S3',Name:'Cashier',Role:'Cashier',Username:'cashier'},stockmgr:{StaffID:'S4',Name:'Stock Mgr',Role:'Stock Manager',Username:'stockmgr'}};
+var DP={admin:'Admin123',manager:'mgr123',cashier:'cash123',stockmgr:'stk123'};
+
+// ── SECURITY: Login lockout system ──
+var SEC={
+  attempts:0,       // wrong attempts in current phase
+  phase:0,          // 0=normal, 1=after first lockout
+  lockedUntil:0,    // timestamp when lock expires
+  BACKUP_PIN:'5110',// default backup PIN
+  ADMIN_PASS:'Admin123' // admin password (changeable)
+};
+function secCheck(){
+  // Already locked?
+  if(SEC.lockedUntil>Date.now()){
+    var rem=Math.ceil((SEC.lockedUntil-Date.now())/1000);
+    var mins=Math.floor(rem/60),secs=rem%60;
+    lerr('🔒 Account locked! Try after '+(mins>0?mins+'m ':'')+secs+'s');
+    return false;
+  }
+  return true;
+}
+function secFail(){
+  SEC.attempts++;
+  if(SEC.phase===0){
+    // Phase 0: 3 attempts → 1 minute lock
+    if(SEC.attempts>=3){
+      SEC.lockedUntil=Date.now()+60000; // 1 minute
+      SEC.attempts=0;SEC.phase=1;
+      lerr('🔒 3 wrong attempts! Locked for 1 minute.');
+      startLockTimer();return;
+    }
+    lerr('❌ Wrong password! ('+(3-SEC.attempts)+' attempts left before 1 min lock)');
+  }else{
+    // Phase 1: 2 more attempts → 15 minute lock
+    if(SEC.attempts>=2){
+      SEC.lockedUntil=Date.now()+900000; // 15 minutes
+      SEC.attempts=0;SEC.phase=2;
+      lerr('🔒 Too many attempts! Locked for 15 minutes.');
+      startLockTimer();return;
+    }
+    lerr('❌ Wrong password! ('+(2-SEC.attempts)+' attempts left before 15 min lock)');
+  }
+}
+function secSuccess(){SEC.attempts=0;SEC.phase=0;SEC.lockedUntil=0;}
+var lockInterval=null;
+function startLockTimer(){
+  clearInterval(lockInterval);
+  lockInterval=setInterval(function(){
+    if(SEC.lockedUntil<=Date.now()){
+      clearInterval(lockInterval);
+      var le=document.getElementById('le');
+      if(le){le.textContent='✅ Unlocked! You can try again.';le.style.display='block';le.style.color='#4ade80';
+        setTimeout(function(){le.style.display='none';le.style.color='#f87171';},3000);}
+    }else{
+      var rem=Math.ceil((SEC.lockedUntil-Date.now())/1000);
+      var mins=Math.floor(rem/60),secs=rem%60;
+      var le=document.getElementById('le');
+      if(le){le.textContent='🔒 Locked! '+(mins>0?mins+'m ':'')+secs+'s remaining...';le.style.display='block';}
+    }
+  },1000);
+}
+
+function fl(u,p){document.getElementById('lu').value=u;document.getElementById('lp').value=p;}
+
+// ── API ──
+async function api(act,data){
+  data=data||{};
+  if(!API){if(act!=='loginStaff')toast('⚠️ Set API URL in Settings','warn');throw new Error('No API URL');}
+  // Use POST with form-encoded body — works reliably with GAS web apps,
+  // avoids CORS preflight, and handles large payloads (full backups, etc.)
+  var formBody='action='+encodeURIComponent(act)+'&data='+encodeURIComponent(JSON.stringify(data));
+  var r=await fetch(API,{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:formBody,
+    redirect:'follow'
+  });
+  var j=await r.json();
+  if(!j.success)throw new Error(j.error||'API Error');
+  return j;
+}
+
+// ── LOGIN ──
+async function doLogin(){
+  if(!secCheck())return;
+  var u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value.trim();
+  if(!u||!p){lerr('Enter username and password');return;}
+  if(DU[u]&&DP[u]===p){secSuccess();CU=DU[u];showApp();return;}
+  if(DU[u]&&DP[u]!==p){secFail();return;}
+  if(!API){secFail();return;}
+  try{var r=await api('loginStaff',{Username:u,Password:p});secSuccess();CU=r.user;showApp();}
+  catch(e){secFail();}
+}
+function lerr(m){var el=document.getElementById('le');el.textContent=m;el.style.display='block';if(!m.includes('🔒'))setTimeout(function(){el.style.display='none';},4000);}
+
+function showApp(){
+  document.getElementById('ls').style.display='none';
+  document.getElementById('app').style.display='block';
+  var av=document.getElementById('uav');
+  av.textContent=(CU.Name||'A')[0].toUpperCase();
+  av.style.background=CU.Role==='Admin'?'#dc2626':CU.Role==='Manager'?'#ea580c':CU.Role==='Cashier'?'#1d4ed8':'#16a34a';
+  document.getElementById('uun').textContent=CU.Name;
+  var rb=document.getElementById('uur');rb.textContent=CU.Role;
+  rb.className='ur '+(CU.Role==='Admin'?'ra':CU.Role==='Manager'?'rm':CU.Role==='Cashier'?'rc':'rs');
+  applyRoles();setDates();setupHwScan();
+  // Draw logo in sidebar
+  if(typeof drawShahLogo==='function')drawShahLogo(document.getElementById('sbLogo'),32,null);
+  var def={Admin:'dashboard',Manager:'dashboard',Cashier:'pos','Stock Manager':'items'};
+  setTimeout(function(){WM.open(def[CU.Role]||'dashboard');},100);
+}
+function doLogout(){
+  CU=null;
+  Object.keys(WM.ws).slice().forEach(function(id){WM.close(id);});
+  document.getElementById('app').style.display='none';
+  document.getElementById('ls').style.display='flex';
+}
+
+function toggleSB(){
+  var sb=document.getElementById('sb'),mn=document.getElementById('mn'),wd=document.getElementById('wdsk'),tb=document.getElementById('tb');
+  sb.classList.toggle('col');var c=sb.classList.contains('col');
+  mn.classList.toggle('exp',c);wd.classList.toggle('exp',c);tb.classList.toggle('exp',c);
+}
+
+// ── HELPER: Tab jaisa agla field focus karo ──
+function moveToNext(container,currentEl){
+  var all=Array.from((container||document).querySelectorAll(
+    'input:not([disabled]):not([type="hidden"]):not([readonly]),select:not([disabled]),textarea:not([disabled])'
+  ));
+  var idx=all.indexOf(currentEl);
+  if(idx>=0&&idx<all.length-1){
+    var next=all[idx+1];
+    next.focus();
+    if(next.type==='number'||next.type==='text')try{next.select();}catch(e){}
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// WINDOWS MANAGER — Clean multi-window system
+// POS: multiple instances, each with own cart
+// Other pages: one per type (bring to front if exists)
+// ═══════════════════════════════════════════════════
+var WM={
+  ws:{},zT:210,wCnt:0,
+  
+  // Page configs — POS has multi=true
+  cfg:{
+    dashboard:{ico:'📊',lbl:'Dashboard',multi:false,load:loadDash},
+    pos:{ico:'🧾',lbl:'POS Billing',multi:true,load:null},
+    items:{ico:'📦',lbl:'Items / Products',multi:false,load:loadItems},
+    purchases:{ico:'🛒',lbl:'Purchases',multi:false,load:loadPurs},
+    sales:{ico:'📈',lbl:'Sales History',multi:false,load:loadSales},
+    customers:{ico:'👥',lbl:'Customers',multi:false,load:loadCusts},
+    suppliers:{ico:'🏭',lbl:'Suppliers',multi:false,load:loadSups},
+    payments:{ico:'💰',lbl:'Payments',multi:false,load:loadPays},
+    expenses:{ico:'💸',lbl:'Expenses',multi:false,load:loadExps},
+    accounts:{ico:'📒',lbl:'Accounts P&L',multi:false,load:loadPL},
+    services:{ico:'🛠️',lbl:'Service / Job Cards',multi:false,load:loadSvcs},
+    staff:{ico:'👨‍💼',lbl:'Staff Management',multi:false,load:loadStf},
+    marketing:{ico:'📢',lbl:'Marketing',multi:false,load:loadMkt},
+    settings:{ico:'⚙️',lbl:'Settings',multi:false,load:function(){}}
+  },
+
+  open:function(pg){
+    if(!CU)return;
+    if(!canAcc(pg)){toast('🔒 Access denied: '+CU.Role,'error');return;}
+    var cfg=this.cfg[pg];if(!cfg)return;
+
+    // For non-multi pages: if already open, bring to front
+    if(!cfg.multi){
+      var existing=this.findByPg(pg);
+      if(existing){
+        if(this.ws[existing].st==='min')this.restore(existing);
+        else this.focus(existing);
+        return;
+      }
+    }
+
+    // Create new window
+    var wid=pg+'_'+(++this.wCnt);
+    var d=document.getElementById('wdsk');
+    var dw=d.offsetWidth||900,dh=d.offsetHeight||600;
+    var n=Object.keys(this.ws).length;
+    var W=Math.min(960,dw-30),H=Math.min(650,dh-30);
+    var x=20+n*22,y=10+n*22;
+
+    var el=document.createElement('div');
+    el.className='ew wf';el.id='w-'+wid;
+    el.style.cssText='left:'+x+'px;top:'+y+'px;width:'+W+'px;height:'+H+'px;z-index:'+(++this.zT);
+
+    var lblSuffix=cfg.multi?' #'+this.wCnt:'';
+    el.innerHTML=
+      '<div class="wtb" id="wt-'+wid+'">'
+      +'<span class="wic">'+cfg.ico+'</span>'
+      +'<span class="wlb">'+cfg.lbl+lblSuffix+'</span>'
+      +'<div class="wbt">'
+      +'<button class="wb wbmn" onclick="WM.minimize(\''+wid+'\')"></button>'
+      +'<button class="wb wbmx" onclick="WM.toggleMax(\''+wid+'\')"></button>'
+      +'<button class="wb wbcl" onclick="WM.close(\''+wid+'\')"></button>'
+      +'</div></div>'
+      +'<div class="wbd" id="wb-'+wid+'"></div>';
+
+    d.appendChild(el);
+    this.ws[wid]={el:el,st:'norm',x:x,y:y,w:W,h:H,pg:pg};
+
+    if(pg==='pos'){
+      // POS: fresh instance with own cart
+      this.ws[wid].cart=[];
+      this.ws[wid].selItem=null;
+      this.ws[wid].lastSale=null;
+      this.initPOS(wid);
+    }else{
+      // Other pages: move the DOM element into window
+      var src=document.getElementById('pg-'+pg);
+      var wb=document.getElementById('wb-'+wid);
+      if(src&&wb){src.style.display='block';src.classList.add('act');wb.appendChild(src);}
+    }
+
+    this.setupDrag(el,wid);
+    this.focAll();this.focus(wid);this.addTBI(wid,cfg,lblSuffix);
+
+    document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('act');});
+    var nav=document.querySelector('[data-p="'+pg+'"]');if(nav)nav.classList.add('act');
+
+    if(pg!=='pos'){
+      setTimeout(function(){try{cfg.load();}catch(e){}},80);
+    }
+  },
+
+  // Init a fresh POS window
+  initPOS:function(wid){
+    var self=this;var w=this.ws[wid];
+    var wb=document.getElementById('wb-'+wid);if(!wb)return;
+
+    // Clone POS template
+    var tpl=document.getElementById('pg-pos');
+    if(!tpl)return;
+    var clone=tpl.cloneNode(true);
+    clone.id='pos-'+wid;clone.style.display='block';clone.classList.add('act');
+    wb.appendChild(clone);
+
+    // Get all POS fields from this clone (using classes, not IDs)
+    var c=clone;
+    var search=c.querySelector('.pf-search');
+    var qty=c.querySelector('.pf-qty');
+    var rate=c.querySelector('.pf-rate');
+    var stype=c.querySelector('.pf-stype');
+    var addBtn=c.querySelector('.pf-additem');
+    var svctype=c.querySelector('.pf-svctype');
+    var svcdesc=c.querySelector('.pf-svcdesc');
+    var svcamt=c.querySelector('.pf-svcamt');
+    var addsvc=c.querySelector('.pf-addsvc');
+    var clearBtn=c.querySelector('.pf-clear');
+    var custname=c.querySelector('.pf-custname');
+    var custid=c.querySelector('.pf-custid');
+    var dateEl=c.querySelector('.pf-date');
+    var invtype=c.querySelector('.pf-invtype');
+    var notes=c.querySelector('.pf-notes');
+    var disc=c.querySelector('.pf-disc');
+    var paid=c.querySelector('.pf-paid');
+    var saveBtn=c.querySelector('.pf-save');
+    var newBtns=c.querySelectorAll('.pf-newinv,.pf-newinv2');
+    var printBtn=c.querySelector('.pf-printlast');
+    var sugbox=c.querySelector('.pf-sugbox');
+    var custsug=c.querySelector('.pf-custsug');
+
+    // Set today's date
+    if(dateEl)dateEl.value=new Date().toISOString().slice(0,10);
+
+    // Helper to get cart for this window
+    function getCart(){return self.ws[wid]?self.ws[wid].cart:[];}
+    function setSelItem(item){if(self.ws[wid])self.ws[wid].selItem=item;}
+    function getSelItem(){return self.ws[wid]?self.ws[wid].selItem:null;}
+
+    // ── SUMMARY UPDATE ──
+    function updS(){
+      var cart=getCart();
+      var prods=cart.filter(function(i){return i.IT==='Product';}).reduce(function(a,i){return a+i.Total;},0);
+      var svcs=cart.filter(function(i){return i.IT==='Service';}).reduce(function(a,i){return a+i.Total;},0);
+      var d2=Number(disc?disc.value:0)||0;
+      var grand=prods+svcs-d2;
+      var p2=Number(paid?paid.value:0)||0;
+      var it=c.querySelector('.pf-itotal'),st=c.querySelector('.pf-stotal'),gt=c.querySelector('.pf-grand'),du=c.querySelector('.pf-due');
+      if(it)it.textContent=f(prods);
+      if(st)st.textContent=f(svcs);
+      if(gt)gt.textContent=f(grand);
+      if(du)du.textContent=f(Math.max(0,grand-p2));
+    }
+
+    // ── RENDER CART ──
+    function renderCart(){
+      var cart=getCart();
+      var body=c.querySelector('.pf-cartbody');
+      var cnt=c.querySelector('.pf-count');
+      if(!body)return;
+      if(!cart.length){
+        body.innerHTML='<tr><td colspan="7"><div class="emp"><div class="ei">🛒</div><p>Cart empty</p></div></td></tr>';
+        if(cnt)cnt.textContent='0 items';updS();return;
+      }
+      if(cnt)cnt.textContent=cart.length+' item(s)';
+      body.innerHTML=cart.map(function(ci,i){
+        return '<tr class="'+(ci.IT==='Service'?'svr':'')+'"><td style="font-size:11px;color:var(--tx3)">'+(i+1)+'</td>'
+          +'<td><div style="font-weight:600;font-size:12px">'+ci.ItemName+(ci.IT==='Service'?' <span class="bdg bg2" style="font-size:10px">Svc</span>':'')+'</div>'
+          +'<div style="font-size:10px;color:var(--tx2)">'+(ci.Model||'')+'</div></td>'
+          +'<td><span class="bdg '+(ci.ST==='Wholesale'?'bg2':ci.IT==='Service'?'by2':'bb2')+'" style="font-size:10px">'+ci.ST+'</span></td>'
+          +'<td><input type="number" class="cqty" value="'+ci.Qty+'" min="1" '+(ci.IT==='Service'?'disabled':'')
+          +' onchange="(function(){var cart=WM.ws[\''+wid+'\']&&WM.ws[\''+wid+'\'].cart;if(cart){cart['+i+'].Qty=Number(this.value)||1;cart['+i+'].Total=cart['+i+'].Qty*cart['+i+'].Rate;}})()" style="width:50px;text-align:center;padding:3px;border:1px solid var(--bd);border-radius:4px;font-size:12px;background:var(--sf);color:var(--tx)"></td>'
+          +'<td><input type="number" class="crt" value="'+ci.Rate
+          +'" onchange="(function(){var cart=WM.ws[\''+wid+'\']&&WM.ws[\''+wid+'\'].cart;if(cart){cart['+i+'].Rate=Number(this.value)||0;cart['+i+'].Total=cart['+i+'].Qty*cart['+i+'].Rate;}})()" style="width:66px;text-align:right;padding:3px 5px;border:1px solid var(--bd);border-radius:4px;font-size:12px;background:var(--sf);color:var(--tx)"></td>'
+          +'<td style="min-width:62px;text-align:right;font-family:var(--fm);font-size:12px;font-weight:700;color:var(--pr)">'+f(ci.Total)+'</td>'
+          +'<td><button style="background:none;border:none;color:var(--rd);font-size:15px;padding:2px 4px;cursor:pointer;border-radius:3px" onclick="WM.posRmItem(\''+wid+'\','+i+')">✕</button></td></tr>';
+      }).join('');
+      updS();
+    }
+
+    // Store renderCart on window object for external calls
+    if(self.ws[wid])self.ws[wid].renderCart=renderCart;
+    if(self.ws[wid])self.ws[wid].updS=updS;
+
+    // ── ITEM SUGGEST ──
+    var posT;
+    if(search){
+      search.oninput=function(){
+        clearTimeout(posT);
+        var q=this.value;
+        if(!q.trim()){if(sugbox)sugbox.innerHTML='';setSelItem(null);return;}
+        posT=setTimeout(function(){
+          var ql=q.toLowerCase();
+          var m=C.items.filter(function(i){return (i.Name||'').toLowerCase().includes(ql)||(i.Model||'').toLowerCase().includes(ql)||(i.Barcode||'').toLowerCase().includes(ql);}).slice(0,7);
+          if(!m.length){if(sugbox)sugbox.innerHTML='<div class="sgbx"><div class="si"><span style="color:var(--tx3)">No items found</span></div></div>';return;}
+          if(sugbox)sugbox.innerHTML='<div class="sgbx">'+m.map(function(item){
+            return '<div class="si" onclick="WM.posSelectItem(\''+wid+'\','+JSON.stringify(item).replace(/"/g,'&quot;')+')">'
+              +'<span class="sin">'+item.Name+' <span style="font-weight:400;font-size:11px">'+(item.Model||'')+'</span></span>'
+              +'<span class="sip">R:<strong style="color:var(--pr)">'+f(item.RetailRate)+'</strong> W:<strong style="color:var(--gr)">'+f(item.WholesaleRate)+'</strong></span><br>'
+              +'<span class="sim">Stock:<strong style="color:'+(Number(item.Qty)>0?'var(--gr)':'var(--rd)')+'">'+item.Qty+'</strong> · '+(item.SupplierName||'')+'</span>'
+              +'</div>';
+          }).join('')+'</div>';
+        },200);
+      };
+
+      // ── ENTER = TAB (exactly how Tab works) ──
+      // Tab jis tarah agla field dhundhta hai, Enter bhi wahi karega
+      search.addEventListener('keydown',function(e){
+        if(e.key!=='Enter')return;
+        e.preventDefault();e.stopPropagation();
+        // Agar suggestion dropdown open hai to pehla item select karo
+        var fi=sugbox&&sugbox.querySelector('.si');
+        if(fi){fi.click();return;}
+        // Warna Tab jaisa karo
+        moveToNext(c,e.target);
+      });
+    }
+
+    // ── GLOBAL ENTER=TAB for this POS window ──
+    // Har input/select mein Enter dabao → agla field focus hoga
+    c.addEventListener('keydown',function(e){
+      if(e.key!=='Enter')return;
+      var el=e.target;
+      if(el.tagName==='TEXTAREA')return;  // Textarea mein Enter allow karo
+      if(el.tagName==='BUTTON')return;    // Button press hone do
+      e.preventDefault();
+      e.stopPropagation();
+      // Rate field → Add to cart
+      if(el===rate){self.posAddItem(wid);setTimeout(function(){if(search)search.focus();},50);return;}
+      // Suggestion open hai search mein
+      if(el===search){var fi=sugbox&&sugbox.querySelector('.si');if(fi){fi.click();return;}}
+      // Paid field → Save invoice
+      if(el===paid){self.posSave(wid);return;}
+      // Baaki sab → agla field (Tab jaisa)
+      moveToNext(c,el);
+    });
+    if(stype){
+      stype.onchange=function(){
+        var si=getSelItem();if(!si)return;
+        var t=this.value;
+        if(rate)rate.value=t==='Wholesale'?si.WholesaleRate:si.RetailRate;
+      };
+    }
+
+    // ── ADD ITEM BUTTON ──
+    if(addBtn)addBtn.onclick=function(){self.posAddItem(wid);};
+
+    // ── ADD SERVICE ──
+    if(addsvc)addsvc.onclick=function(){
+      var st=svctype?svctype.value:'Service';
+      var sd=svcdesc?svcdesc.value.trim()||st:st;
+      var sa=Number(svcamt?svcamt.value:0)||0;
+      if(!sa){toast('Enter service amount','warn');return;}
+      var cart=getCart();
+      cart.push({ItemID:'SVC',ItemName:st,Model:sd,Qty:1,Rate:sa,Total:sa,IT:'Service',ST:'Service'});
+      renderCart();
+      if(svcdesc)svcdesc.value='';if(svcamt)svcamt.value='';
+      toast('✅ '+st+' added','ok');
+    };
+
+    // ── CLEAR CART ──
+    if(clearBtn)clearBtn.onclick=function(){
+      if(getCart().length&&!confirm('Clear cart?'))return;
+      if(self.ws[wid])self.ws[wid].cart=[];
+      setSelItem(null);renderCart();
+    };
+
+    // ── SUMMARY INPUTS ──
+    if(disc)disc.oninput=updS;
+    if(paid)paid.oninput=updS;
+
+    // ── CUSTOMER SUGGEST ──
+    var csT;
+    if(custname){
+      custname.oninput=function(){
+        clearTimeout(csT);var q=this.value;
+        if(!q.trim()){if(custsug)custsug.innerHTML='';return;}
+        csT=setTimeout(function(){
+          var ql=q.toLowerCase();
+          var m=C.custs.filter(function(cc){return (cc.Name||'').toLowerCase().includes(ql)||(cc.Phone||'').includes(q);}).slice(0,5);
+          if(!m.length){if(custsug)custsug.innerHTML='';return;}
+          if(custsug)custsug.innerHTML='<div class="sgbx">'+m.map(function(cc){
+            return '<div class="si" onclick="(function(){var cn=document.querySelector(\'#pos-'+wid+' .pf-custname\');var ci=document.querySelector(\'#pos-'+wid+' .pf-custid\');var cs=document.querySelector(\'#pos-'+wid+' .pf-custsug\');if(cn)cn.value=\''+cc.Name.replace(/'/g,"\\'")+'\';if(ci)ci.value=\''+cc.CustomerID+'\';if(cs)cs.innerHTML=\'\';})()">'
+              +'<strong>'+cc.Name+'</strong> <span style="color:var(--tx2);font-size:11px">'+(cc.Phone||'')+'</span>'
+              +'<span style="color:var(--rd);font-size:11px;float:right">Due:'+f(cc.TotalDue)+'</span></div>';
+          }).join('')+'</div>';
+        },200);
+      };
+    }
+
+    // ── SAVE INVOICE ──
+    if(saveBtn)saveBtn.onclick=function(){self.posSave(wid);};
+
+    // ── NEW INVOICE ──
+    newBtns.forEach(function(btn){btn.onclick=function(){self.posNewInv(wid);};});
+
+    // ── PRINT LAST ──
+    if(printBtn)printBtn.onclick=function(){
+      var ls=self.ws[wid]&&self.ws[wid].lastSale;
+      if(!ls){toast('No invoice to print','warn');return;}
+      buildPrint(ls);window.print();
+    };
+
+    // Load item cache
+    if(!C.items.length&&API){api('getItems').then(function(r){C.items=r.data;}).catch(function(){});}
+    if(!C.custs.length&&API){api('getCustomers').then(function(r){C.custs=r.data;}).catch(function(){});}
+  },
+
+  // ── POS: Select item ──
+  posSelectItem:function(wid,item){
+    var w=this.ws[wid];if(!w)return;
+    w.selItem=item;
+    var c=document.getElementById('pos-'+wid);if(!c)return;
+    var search=c.querySelector('.pf-search');
+    var rate=c.querySelector('.pf-rate');
+    var qty=c.querySelector('.pf-qty');
+    var stype=c.querySelector('.pf-stype');
+    var sugbox=c.querySelector('.pf-sugbox');
+    if(search)search.value=item.Name+(item.Model?' ('+item.Model+')':'');
+    if(sugbox)sugbox.innerHTML='';
+    var t=stype?stype.value:'Retail';
+    if(rate)rate.value=t==='Wholesale'?item.WholesaleRate:item.RetailRate;
+    if(qty){qty.value=1;qty.focus();}
+  },
+
+  // ── POS: Add item to cart ──
+  posAddItem:function(wid){
+    var w=this.ws[wid];if(!w)return;
+    if(!w.selItem){toast('Select an item first','warn');return;}
+    var c=document.getElementById('pos-'+wid);if(!c)return;
+    var qty=Number(c.querySelector('.pf-qty')&&c.querySelector('.pf-qty').value)||1;
+    var rate=Number(c.querySelector('.pf-rate')&&c.querySelector('.pf-rate').value)||0;
+    var qs=c.querySelector('.pf-quicksale')&&c.querySelector('.pf-quicksale').checked;
+    var stype=c.querySelector('.pf-stype')&&c.querySelector('.pf-stype').value||'Retail';
+    if(!qs&&Number(w.selItem.Qty)<qty){if(!confirm('⚠️ Only '+w.selItem.Qty+' in stock!\nSell anyway?'))return;}
+    var ex=w.cart.find(function(ci){return ci.ItemID===w.selItem.ItemID&&ci.IT==='Product';});
+    if(ex){ex.Qty+=qty;ex.Total=ex.Qty*ex.Rate;}
+    else w.cart.push({ItemID:w.selItem.ItemID,ItemName:w.selItem.Name,Model:w.selItem.Model||'',Qty:qty,Rate:rate,Total:qty*rate,IT:'Product',ST:stype});
+    if(w.renderCart)w.renderCart();
+    var search=c.querySelector('.pf-search');
+    if(search)search.value='';
+    if(c.querySelector('.pf-qty'))c.querySelector('.pf-qty').value=1;
+    if(c.querySelector('.pf-rate'))c.querySelector('.pf-rate').value='';
+    if(c.querySelector('.pf-sugbox'))c.querySelector('.pf-sugbox').innerHTML='';
+    w.selItem=null;
+    if(search)search.focus();
+  },
+
+  // ── POS: Remove item ──
+  posRmItem:function(wid,idx){
+    var w=this.ws[wid];if(!w)return;
+    w.cart.splice(idx,1);
+    if(w.renderCart)w.renderCart();
+  },
+
+  // ── POS: Save invoice ──
+  posSave:async function(wid){
+    var w=this.ws[wid];if(!w)return;
+    if(!w.cart.length){toast('Cart is empty','warn');return;}
+    var c=document.getElementById('pos-'+wid);if(!c)return;
+    var prods=w.cart.filter(function(i){return i.IT==='Product';}).reduce(function(a,i){return a+i.Total;},0);
+    var svcs=w.cart.filter(function(i){return i.IT==='Service';}).reduce(function(a,i){return a+i.Total;},0);
+    var total=prods+svcs;
+    var disc=Number(c.querySelector('.pf-disc')&&c.querySelector('.pf-disc').value)||0;
+    var grand=total-disc;
+    var paid=Number(c.querySelector('.pf-paid')&&c.querySelector('.pf-paid').value)||0;
+    var sd={CustomerID:c.querySelector('.pf-custid')&&c.querySelector('.pf-custid').value||'',CustomerName:c.querySelector('.pf-custname')&&c.querySelector('.pf-custname').value||'Walk-in',Date:c.querySelector('.pf-date')&&c.querySelector('.pf-date').value||new Date().toISOString().slice(0,10),Type:c.querySelector('.pf-invtype')&&c.querySelector('.pf-invtype').value||'Retail',Total:total,Discount:disc,GrandTotal:grand,Paid:paid,Due:Math.max(0,grand-paid),Notes:c.querySelector('.pf-notes')&&c.querySelector('.pf-notes').value||'',StaffID:CU&&CU.StaffID,items:w.cart};
+    try{
+      var r=await api('addSale',sd);
+      w.lastSale=Object.assign({},sd,{SaleID:r.id});
+      buildPrint(w.lastSale);
+      toast('✅ Invoice: '+r.id,'ok');
+      WM.posNewInv(wid);
+      if(API)api('getItems').then(function(ri){C.items=ri.data;}).catch(function(){});
+    }catch(e){
+      w.lastSale=Object.assign({},sd,{SaleID:'DEMO-'+Date.now()});
+      buildPrint(w.lastSale);
+      toast('✅ Demo: '+w.lastSale.SaleID,'ok');
+      WM.posNewInv(wid);
+    }
+  },
+
+  // ── POS: New invoice ──
+  posNewInv:function(wid){
+    var w=this.ws[wid];if(!w)return;
+    w.cart=[];w.selItem=null;
+    if(w.renderCart)w.renderCart();
+    var c=document.getElementById('pos-'+wid);if(!c)return;
+    var fn=c.querySelector('.pf-custname');if(fn)fn.value='';
+    var fi=c.querySelector('.pf-custid');if(fi)fi.value='';
+    var fn2=c.querySelector('.pf-notes');if(fn2)fn2.value='';
+    var fd=c.querySelector('.pf-disc');if(fd)fd.value=0;
+    var fp=c.querySelector('.pf-paid');if(fp)fp.value=0;
+    var fs=c.querySelector('.pf-search');if(fs)fs.focus();
+  },
+
+  // ── WINDOW CONTROLS ──
+  close:function(wid){
+    var w=this.ws[wid];if(!w)return;
+    var pg=w.pg;
+    // If non-multi page, return DOM to hidden area
+    if(pg!=='pos'){
+      var src=document.getElementById('pg-'+pg);
+      var ct=document.getElementById('ct');
+      if(src&&ct){src.style.display='none';src.classList.remove('act');ct.appendChild(src);}
+    }
+    w.el.remove();delete this.ws[wid];
+    var ti=document.getElementById('tbi-'+wid);if(ti)ti.remove();
+    // Update nav highlight
+    var stillOpen=Object.keys(this.ws).some(function(k){return WM.ws[k].pg===pg;});
+    if(!stillOpen){var nav=document.querySelector('[data-p="'+pg+'"]');if(nav)nav.classList.remove('act');}
+  },
+  minimize:function(wid){
+    var w=this.ws[wid];if(!w)return;w.st='min';w.el.classList.add('wm');
+    var ti=document.getElementById('tbi-'+wid);if(ti)ti.classList.add('tbmn');
+  },
+  restore:function(wid){
+    var w=this.ws[wid];if(!w)return;w.st='norm';w.el.classList.remove('wm','wmx');
+    w.el.style.cssText='left:'+w.x+'px;top:'+w.y+'px;width:'+w.w+'px;height:'+w.h+'px;z-index:'+(++this.zT);
+    this.focus(wid);
+    var ti=document.getElementById('tbi-'+wid);if(ti)ti.classList.remove('tbmn');
+  },
+  toggleMax:function(wid){
+    var w=this.ws[wid];if(!w)return;
+    if(w.st==='max'){
+      w.st='norm';w.el.classList.remove('wmx');
+      w.el.style.cssText='left:'+w.x+'px;top:'+w.y+'px;width:'+w.w+'px;height:'+w.h+'px;z-index:'+w.el.style.zIndex;
+    }else{
+      w.x=parseInt(w.el.style.left)||w.x;w.y=parseInt(w.el.style.top)||w.y;
+      w.w=parseInt(w.el.style.width)||w.w;w.h=parseInt(w.el.style.height)||w.h;
+      w.st='max';w.el.classList.add('wmx');
+    }
+  },
+  focus:function(wid){
+    document.querySelectorAll('.ew').forEach(function(e){e.classList.remove('wf');});
+    var w=this.ws[wid];if(w){w.el.classList.add('wf');w.el.style.zIndex=++this.zT;}
+    document.querySelectorAll('.tbi').forEach(function(i){i.classList.remove('tbf');});
+    var ti=document.getElementById('tbi-'+wid);if(ti)ti.classList.add('tbf');
+  },
+  focAll:function(){document.querySelectorAll('.ew').forEach(function(e){e.classList.remove('wf');});},
+  findByPg:function(pg){
+    return Object.keys(this.ws).find(function(k){return WM.ws[k].pg===pg;});
+  },
+  setupDrag:function(el,wid){
+    var self=this;
+    var tb=el.querySelector('.wtb');
+    tb.addEventListener('mousedown',function(e){
+      if(e.target.classList.contains('wb'))return;
+      var w=self.ws[wid];if(!w||w.st==='max')return;
+      self.focus(wid);
+      var sx=e.clientX,sy=e.clientY,ox=parseInt(el.style.left)||0,oy=parseInt(el.style.top)||0;
+      function mv(m){el.style.left=(ox+m.clientX-sx)+'px';el.style.top=(oy+m.clientY-sy)+'px';}
+      function up(){w.x=parseInt(el.style.left);w.y=parseInt(el.style.top);document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);}
+      document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
+    });
+    tb.addEventListener('dblclick',function(e){if(!e.target.classList.contains('wb'))self.toggleMax(wid);});
+    el.addEventListener('mousedown',function(e){if(!e.target.classList.contains('wb'))self.focus(wid);});
+  },
+  addTBI:function(wid,cfg,sfx){
+    sfx=sfx||'';
+    var d=document.getElementById('tbit');
+    var div=document.createElement('div');div.className='tbi tbf';div.id='tbi-'+wid;
+    div.innerHTML='<span style="font-size:13px;flex-shrink:0">'+cfg.ico+'</span><span style="overflow:hidden;text-overflow:ellipsis;flex:1">'+cfg.lbl+sfx+'</span>';
+    var self=this;
+    div.onclick=function(){
+      var w=self.ws[wid];if(!w)return;
+      if(w.st==='min')self.restore(wid);
+      else if(w.el.classList.contains('wf'))self.minimize(wid);
+      else self.focus(wid);
+    };
+    d.appendChild(div);
+  }
+};
+
+// Nav click
+document.querySelectorAll('.ni[data-p]').forEach(function(ni){
+  ni.addEventListener('click',function(){
+    var pg=this.getAttribute('data-p');
+    if(this.classList.contains('lk')){toast('🔒 Access denied for '+CU.Role,'error');return;}
+    WM.open(pg);
+  });
+});
+document.addEventListener('click',function(e){
+  if(e.target.classList.contains('mov'))e.target.classList.remove('on');
+  if(!e.target.closest('.gsw'))document.getElementById('gsd').classList.remove('on');
+});
+// Taskbar clock
+setInterval(function(){
+  var n=new Date(),el=document.getElementById('tbc');
+  if(el)el.innerHTML=n.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit'})+'<br>'+n.toLocaleDateString('en-PK',{day:'2-digit',month:'short'});
+},1000);
+
+// F2/F4 keyboard shortcuts — act on last focused POS window
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('ls').style.display!=='none')return;
+  var posWid=null;
+  // Find focused POS window
+  document.querySelectorAll('.ew.wf').forEach(function(el){
+    var id=el.id.replace('w-','');
+    if(WM.ws[id]&&WM.ws[id].pg==='pos')posWid=id;
+  });
+  if(!posWid){
+    // Find any open POS
+    Object.keys(WM.ws).forEach(function(k){if(WM.ws[k].pg==='pos')posWid=k;});
+  }
+  if(e.key==='F2'&&posWid){e.preventDefault();WM.posNewInv(posWid);}
+  if(e.key==='F4'&&posWid){e.preventDefault();WM.posSave(posWid);}
+  if(e.key==='Escape'){document.querySelectorAll('.mov.on').forEach(function(m){m.classList.remove('on');});stopScan();}
+});
+// ── GLOBAL SEARCH ──
+var gsT;
+function gsearch(q){
+  clearTimeout(gsT);var box=document.getElementById('gsd');
+  if(!q.trim()){box.classList.remove('on');return;}
+  gsT=setTimeout(function(){
+    var ql=q.toLowerCase();
+    var items=C.items.filter(function(i){return (i.Name||'').toLowerCase().includes(ql)||(i.Model||'').toLowerCase().includes(ql)||(i.Barcode||'').toLowerCase().includes(ql)||(i.Company||'').toLowerCase().includes(ql);}).slice(0,8);
+    if(!items.length){box.innerHTML='<div class="gdi"><span style="color:var(--tx3)">No results for "'+q+'"</span></div>';}
+    else{box.innerHTML=items.map(function(i){return '<div class="gdi"><div><div class="gdn">'+i.Name+'</div><div class="gdm">📦 '+(i.Model||'—')+' · '+(i.Company||'—')+' · Stock: <strong style="color:'+(Number(i.Qty)>0?'var(--gr)':'var(--rd)')+'">'+i.Qty+'</strong></div></div><div class="gdp">Retail: <strong style="color:var(--pr)">'+f(i.RetailRate)+'</strong><br>W/sale: <strong style="color:var(--gr)">'+f(i.WholesaleRate)+'</strong></div></div>';}).join('');}
+    box.classList.add('on');
+  },280);
+}
+
+// ── HARDWARE BARCODE SCANNER ──
+function setupHwScan(){
+  var buf='',tmr=null;
+  document.addEventListener('keydown',function(e){
+    // Skip if inside a text input
+    if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement&&document.activeElement.tagName))return;
+    if(e.key.length===1&&!e.ctrlKey&&!e.altKey){buf+=e.key;clearTimeout(tmr);tmr=setTimeout(function(){buf='';},80);}
+    if(e.key==='Enter'&&buf.length>=4){var code=buf.trim();buf='';clearTimeout(tmr);handleScan(code);}
+  });
+}
+function handleScan(code){
+  if(!code)return;
+  var item=C.items.find(function(i){return (i.Barcode||'').toLowerCase()===code.toLowerCase();});
+  if(item){
+    // Add to last focused POS window
+    var posWid=null;
+    document.querySelectorAll('.ew.wf').forEach(function(el){var id=el.id.replace('w-','');if(WM.ws[id]&&WM.ws[id].pg==='pos')posWid=id;});
+    if(!posWid)Object.keys(WM.ws).forEach(function(k){if(WM.ws[k].pg==='pos')posWid=k;});
+    if(posWid){WM.posSelectItem(posWid,item);WM.posAddItem(posWid);toast('✅ Scanned: '+item.Name,'ok');}
+    else toast('📦 '+item.Name+' | Stock:'+item.Qty+' | '+f(item.RetailRate),'info');
+  }else{toast('🔍 Barcode: '+code,'info');}
+}
+
+// ── CAMERA SCANNER ──
+var scanStr=null,scanAId=null;
+async function openScan(){
+  try{
+    var stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+    scanStr=stream;document.getElementById('svid').srcObject=stream;
+    om('mScan');document.getElementById('scanSt').textContent='📷 Scanning...';
+    var v=document.getElementById('svid'),canv=document.getElementById('scanC'),ctx=canv.getContext('2d');
+    var loop=async function(){
+      if(!scanStr)return;
+      if(v.readyState===v.HAVE_ENOUGH_DATA){
+        canv.width=v.videoWidth;canv.height=v.videoHeight;ctx.drawImage(v,0,0);
+        if('BarcodeDetector' in window){try{var bd=new BarcodeDetector({formats:['ean_13','ean_8','code_128','code_39','qr_code']});var bs=await bd.detect(canv);if(bs.length>0){stopScan();handleScan(bs[0].rawValue);return;}}catch(e){}}
+      }
+      scanAId=requestAnimationFrame(loop);
+    };
+    v.onloadedmetadata=function(){v.play();scanAId=requestAnimationFrame(loop);};
+  }catch(e){toast('📷 Camera not available. Use hardware scanner.','warn');}
+}
+function stopScan(){
+  if(scanStr){scanStr.getTracks().forEach(function(t){t.stop();});scanStr=null;}
+  if(scanAId){cancelAnimationFrame(scanAId);scanAId=null;}
+  cm('mScan');
+}
+
+// ── DASHBOARD ──
+async function loadDash(){
+  try{
+    var r=await api('getDashboard'),d=r.data;
+    document.getElementById('d1').textContent=f(d.todaySalesTotal);
+    document.getElementById('d1s').textContent=d.todaySalesCount+' invoices today';
+    document.getElementById('d2').textContent=(d.totalStock||0).toLocaleString();
+    document.getElementById('d2s').textContent='Value: '+f(d.totalStockValue);
+    document.getElementById('d3').textContent=f(d.totalCustomerDue);
+    document.getElementById('d4').textContent=f(d.totalSupplierDue);
+    document.getElementById('d5').textContent=f(d.monthProfit);
+    document.getElementById('d5s').textContent='Revenue: '+f(d.monthRevenue);
+    document.getElementById('d6').textContent=d.pendingServices||0;
+    document.getElementById('rsl').innerHTML=d.recentSales&&d.recentSales.length?d.recentSales.map(function(s){return '<tr><td style="font-family:var(--fm);font-size:11px">'+s.SaleID+'</td><td>'+(s.CustomerName||'Walk-in')+'</td><td><span class="bdg '+(s.Type==='Retail'?'bb2':'bg2')+'">'+s.Type+'</span></td><td style="font-family:var(--fm);font-weight:700">'+f(s.GrandTotal)+'</td><td style="color:var(--gr);font-family:var(--fm)">'+f(s.Paid)+'</td><td style="color:var(--rd);font-family:var(--fm)">'+f(s.Due)+'</td><td>'+s.Date+'</td></tr>';}).join(''):'<tr><td colspan="7"><div class="emp"><p>No sales yet</p></div></td></tr>';
+    document.getElementById('lst').innerHTML=d.lowStock&&d.lowStock.length?d.lowStock.map(function(i){return '<tr><td>'+i.Name+' <span style="font-size:10px;color:var(--tx3)">'+(i.Model||'')+'</span></td><td><span class="bdg '+(Number(i.Qty)<=0?'br2':'bo2')+'">'+i.Qty+'</span></td><td><span class="bdg '+(Number(i.Qty)<=0?'br2':'bo2')+'">'+(Number(i.Qty)<=0?'Out of Stock':'Low')+'</span></td></tr>';}).join(''):'<tr><td colspan="3"><div class="emp"><p>✅ All items in stock</p></div></td></tr>';
+  }catch(e){console.log('Dash:',e);}
+}
+
+// ── ITEMS ──
+async function loadItems(){
+  try{var r=await api('getItems');C.items=r.data;renderItems();}
+  catch(e){terr('itB',10,e.message);}
+}
+function renderItems(){
+  var b=document.getElementById('itB');
+  if(!C.items.length){b.innerHTML=erow(10,'No items yet. Add stock through Purchases module.');return;}
+  b.innerHTML=C.items.map(function(i){
+    return '<tr><td><strong>'+i.Name+'</strong></td><td style="font-family:var(--fm);font-size:11px">'+(i.Model||'—')+'</td><td>'+(i.Company||'—')+'</td><td>'+(i.Quality||'—')+'</td><td>'+(i.SupplierName||'—')+'</td><td><span class="bdg '+(Number(i.Qty)<=0?'br2':Number(i.Qty)<=5?'bo2':'bg2')+'">'+i.Qty+'</span></td><td style="font-family:var(--fm)">'+f(i.PurchaseRate)+'</td><td style="font-family:var(--fm);color:var(--pr)">'+f(i.RetailRate)+'</td><td style="font-family:var(--fm);color:var(--gr)">'+f(i.WholesaleRate)+'</td><td style="font-family:var(--fm);font-size:11px;color:var(--tx3)">'+(i.Barcode||i.ItemID)+'</td></tr>';
+  }).join('');
+}
+async function openIM(item){
+  item=item||null;
+  if(!C.sups.length&&API){try{var r=await api('getSuppliers');C.sups=r.data;}catch(e){}}
+  var sel=document.getElementById('iSup');
+  sel.innerHTML='<option value="">-- Select Supplier --</option>'+C.sups.map(function(s){return '<option value="'+s.SupplierID+'" data-n="'+s.Name+'">'+s.Name+'</option>';}).join('');
+  document.getElementById('mIT').textContent=item?'Edit Item':'Add Item';
+  document.getElementById('eiID').value=item?item.ItemID:'';
+  document.getElementById('iN').value=item?item.Name||'':'';
+  document.getElementById('iMo').value=item?item.Model||'':'';
+  document.getElementById('iCo').value=item?item.Company||'':'';
+  document.getElementById('iQl').value=item?item.Quality||'':'';
+  document.getElementById('iQt').value=item?item.Qty||0:0;
+  document.getElementById('iPR').value=item?item.PurchaseRate||'':'';
+  document.getElementById('iRR').value=item?item.RetailRate||'':'';
+  document.getElementById('iWR').value=item?item.WholesaleRate||'':'';
+  document.getElementById('iBR').value=item?item.Barcode||'':'';
+  if(item&&item.SupplierID)sel.value=item.SupplierID;
+  om('mItem');
+}
+async function saveItem(){
+  var id=document.getElementById('eiID').value;
+  var sel=document.getElementById('iSup');
+  var sn=sel.options[sel.selectedIndex]&&sel.options[sel.selectedIndex].getAttribute('data-n')||'';
+  var d={ItemID:id,Name:document.getElementById('iN').value.trim(),Model:document.getElementById('iMo').value,Company:document.getElementById('iCo').value,Quality:document.getElementById('iQl').value,Qty:document.getElementById('iQt').value,SupplierID:sel.value,SupplierName:sn,PurchaseRate:document.getElementById('iPR').value,RetailRate:document.getElementById('iRR').value,WholesaleRate:document.getElementById('iWR').value,Barcode:document.getElementById('iBR').value};
+  if(!d.Name){toast('Item name required','error');return;}
+  if(!d.SupplierID){toast('Supplier is mandatory!','error');return;}
+  try{await api(id?'updateItem':'addItem',d);toast('✅ Item '+(id?'updated':'added'),'ok');cm('mItem');loadItems();}
+  catch(e){toast('❌ '+e.message,'error');}
+}
+async function delItem(id,name){
+  if(!confirm('Delete "'+name+'"?'))return;
+  try{await api('deleteItem',{ItemID:id});toast('🗑️ Deleted','ok');loadItems();}
+  catch(e){toast('❌ '+e.message,'error');}
+}
+
+// ── PURCHASES ──
+async function loadPurs(){try{var r=await api('getPurchases');C.purs=r.data;renderPurs();}catch(e){terr('purB',8,e.message);}}
+function renderPurs(){
+  var b=document.getElementById('purB');if(!C.purs.length){b.innerHTML=erow(8,'No purchases');return;}
+  b.innerHTML=C.purs.slice().reverse().map(function(p){return '<tr><td style="font-family:var(--fm);font-size:11px">'+p.PurchaseID+'</td><td>'+p.Date+'</td><td><strong>'+p.SupplierName+'</strong></td><td>'+(p.items&&p.items.length||'—')+'</td><td style="font-family:var(--fm);font-weight:700">'+f(p.Total)+'</td><td style="color:var(--gr);font-family:var(--fm)">'+f(p.Paid)+'</td><td style="color:var(--rd);font-family:var(--fm)">'+f(p.Due)+'</td><td><span class="bdg '+(Number(p.Due)<=0?'bg2':'br2')+'">'+(Number(p.Due)<=0?'Paid':'Pending')+'</span></td></tr>';}).join('');
+}
+async function openPM(){
+  if(!C.sups.length&&API){try{var r=await api('getSuppliers');C.sups=r.data;}catch(e){}}
+  if(!C.items.length&&API){try{var r=await api('getItems');C.items=r.data;}catch(e){}}
+  document.getElementById('pSup').innerHTML='<option value="">-- Select Supplier --</option>'+C.sups.map(function(s){return '<option value="'+s.SupplierID+'" data-n="'+s.Name+'">'+s.Name+'</option>';}).join('');
+  document.getElementById('pItm').innerHTML='<option value="">-- Select Item --</option>'+C.items.map(function(i){return '<option value="'+i.ItemID+'" data-n="'+i.Name+'" data-r="'+i.PurchaseRate+'">'+i.Name+(i.Model?' ('+i.Model+')':'')+'</option>';}).join('');
+  purItems=[];document.getElementById('pIB').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:18px">No items added yet</td></tr>';
+  document.getElementById('pTot').textContent=f(0);document.getElementById('pPaid').value=0;document.getElementById('pDue').textContent=f(0);
+  document.getElementById('pNt').value='';
+  // Clear new item form
+  ['niName','niModel','niCompany','niQuality','niBarcode','niRetail','niWholesale','niPurRate'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  if(document.getElementById('niQty'))document.getElementById('niQty').value=1;
+  // Default to NEW item mode
+  setItemMode('new');
+  setDates();om('mPur');
+}
+function setPR(){var sel=document.getElementById('pItm');document.getElementById('pRate').value=sel.options[sel.selectedIndex]&&sel.options[sel.selectedIndex].getAttribute('data-r')||'';}
+function addPI(){
+  var sel=document.getElementById('pItm');if(!sel.value){toast('Select item','warn');return;}
+  var qty=Number(document.getElementById('pQty').value)||1;
+  var rate=Number(document.getElementById('pRate').value)||0;
+  purItems.push({ItemID:sel.value,ItemName:sel.options[sel.selectedIndex].getAttribute('data-n'),Qty:qty,Rate:rate,Total:qty*rate});
+  renderPI();
+}
+function renderPI(){
+  var b=document.getElementById('pIB');
+  if(!purItems.length){b.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:18px">No items added yet</td></tr>';updPur();return;}
+  b.innerHTML=purItems.map(function(i,idx){
+    var nameCell='<strong>'+i.ItemName+'</strong>';
+    if(i.IsNew){nameCell+=' <span class="bdg bg2" style="font-size:9px">NEW</span>';}
+    if(i.Model)nameCell+='<br><span style="font-size:10px;color:var(--tx2)">'+i.Model+(i.Company?' · '+i.Company:'')+'</span>';
+    return '<tr><td>'+nameCell+'</td><td>'+i.Qty+'</td><td style="font-family:var(--fm)">'+f(i.Rate)+'</td><td style="font-family:var(--fm);font-weight:700">'+f(i.Total)+'</td><td><button class="btn br bsm" onclick="purItems.splice('+idx+',1);renderPI()">✕</button></td></tr>';
+  }).join('');
+  updPur();
+}
+function updPur(){var tot=purItems.reduce(function(a,i){return a+i.Total;},0);var paid=Number(document.getElementById('pPaid').value)||0;document.getElementById('pTot').textContent=f(tot);document.getElementById('pDue').textContent=f(Math.max(0,tot-paid));}
+async function savePur(){
+  var sel=document.getElementById('pSup');if(!sel.value){toast('Select supplier','error');return;}
+  if(!purItems.length){toast('Add at least one item','error');return;}
+  var supId=sel.value, supName=sel.options[sel.selectedIndex].getAttribute('data-n');
+  var tot=purItems.reduce(function(a,i){return a+i.Total;},0);
+  var paid=Number(document.getElementById('pPaid').value)||0;
+  try{
+    // Step 1: For NEW items, create them first in Items table
+    for(var idx=0;idx<purItems.length;idx++){
+      var pi=purItems[idx];
+      if(pi.IsNew){
+        var newItem={
+          Name:pi.ItemName, Model:pi.Model||'', Company:pi.Company||'',
+          Quality:pi.Quality||'', Qty:0,  // qty will be added by purchase
+          SupplierID:supId, SupplierName:supName,
+          PurchaseRate:pi.Rate, RetailRate:pi.RetailRate||0,
+          WholesaleRate:pi.WholesaleRate||0, Barcode:pi.Barcode||''
+        };
+        var r=await api('addItem',newItem);
+        if(r.id){pi.ItemID=r.id;}  // assign real ID for purchase
+      }
+    }
+    // Step 2: Save purchase (this will increase stock automatically)
+    await api('addPurchase',{
+      SupplierID:supId, SupplierName:supName,
+      Date:document.getElementById('pDate').value,
+      Total:tot, Paid:paid, Due:tot-paid,
+      Notes:document.getElementById('pNt').value,
+      items:purItems
+    });
+    toast('✅ Purchase saved! Stock updated.','ok');
+    cm('mPur');loadPurs();
+    if(API)api('getItems').then(function(r){C.items=r.data;}).catch(function(){});
+  }catch(e){toast('❌ '+e.message,'error');}
+}
+
+// ── Toggle between New Item / Existing Item mode ──
+function setItemMode(mode){
+  var nb=document.getElementById('newItemBox'),eb=document.getElementById('existItemBox');
+  var nbtn=document.getElementById('modeNewBtn'),ebtn=document.getElementById('modeExistBtn');
+  if(mode==='new'){nb.style.display='block';eb.style.display='none';nbtn.classList.add('act');ebtn.classList.remove('act');}
+  else{nb.style.display='none';eb.style.display='block';ebtn.classList.add('act');nbtn.classList.remove('act');}
+}
+
+// ── Add NEW item to purchase (creates item + adds to purchase) ──
+function addNewItemToPurchase(){
+  var name=document.getElementById('niName').value.trim();
+  if(!name){toast('Item name required','error');document.getElementById('niName').focus();return;}
+  var qty=Number(document.getElementById('niQty').value)||0;
+  if(qty<=0){toast('Enter valid Qty','error');document.getElementById('niQty').focus();return;}
+  var rate=Number(document.getElementById('niPurRate').value)||0;
+  if(rate<=0){toast('Enter Purchase Rate','error');document.getElementById('niPurRate').focus();return;}
+
+  purItems.push({
+    IsNew:true,                 // flag: new item, will be created on save
+    ItemID:'NEW_'+Date.now(),   // temp ID
+    ItemName:name,
+    Model:document.getElementById('niModel').value,
+    Company:document.getElementById('niCompany').value,
+    Quality:document.getElementById('niQuality').value,
+    Barcode:document.getElementById('niBarcode').value,
+    RetailRate:Number(document.getElementById('niRetail').value)||0,
+    WholesaleRate:Number(document.getElementById('niWholesale').value)||0,
+    Qty:qty, Rate:rate, Total:qty*rate
+  });
+  renderPI();
+  // Clear new-item form
+  ['niName','niModel','niCompany','niQuality','niBarcode','niRetail','niWholesale','niPurRate'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.value='';
+  });
+  document.getElementById('niQty').value=1;
+  document.getElementById('niName').focus();
+  toast('✅ "'+name+'" added to purchase','ok');
+}
+
+// ── SALES HISTORY ──
+async function loadSales(){try{var r=await api('getSales');C.sales=r.data;renderSales();}catch(e){terr('salB',8,e.message);}}
+function renderSales(){
+  var b=document.getElementById('salB');if(!C.sales.length){b.innerHTML=erow(8,'No sales found');return;}
+  b.innerHTML=C.sales.slice().reverse().map(function(s){return '<tr><td style="font-family:var(--fm);font-size:11px">'+s.SaleID+'</td><td>'+s.Date+'</td><td>'+(s.CustomerName||'Walk-in')+'</td><td><span class="bdg '+(s.Type==='Retail'?'bb2':'bg2')+'">'+s.Type+'</span></td><td style="font-family:var(--fm);font-weight:700">'+f(s.GrandTotal)+'</td><td style="color:var(--gr);font-family:var(--fm)">'+f(s.Paid)+'</td><td style="color:var(--rd);font-family:var(--fm)">'+f(s.Due)+'</td><td><button class="btn bo bsm" onclick=\'viewSale('+JSON.stringify(s)+')\'>👁️</button> <button class="btn br bsm" onclick="delSale(\''+s.SaleID+'\')">🗑️</button></td></tr>';}).join('');
+}
+function viewSale(s){
+  document.getElementById('mSDT').textContent='🧾 Invoice: '+s.SaleID;
+  document.getElementById('mSDB').innerHTML='<div class="cgr" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px"><div class="cd cb"><div class="ci">💰</div><div class="cl">Total</div><div class="cv">'+f(s.GrandTotal)+'</div></div><div class="cd cg"><div class="ci">✅</div><div class="cl">Paid</div><div class="cv">'+f(s.Paid)+'</div></div><div class="cd cr"><div class="ci">🔴</div><div class="cl">Due</div><div class="cv">'+f(s.Due)+'</div></div></div><p style="font-size:13px;margin-bottom:10px"><strong>Customer:</strong> '+(s.CustomerName||'Walk-in')+' | <strong>Date:</strong> '+s.Date+' | <strong>Type:</strong> '+s.Type+'</p><div class="tres"><table><thead><tr><th>Item</th><th>Type</th><th>Qty</th><th>Rate</th><th>Total</th></tr></thead><tbody>'+((s.items||[]).map(function(i){return '<tr><td>'+i.ItemName+'</td><td>'+(i.ItemType||'Product')+'</td><td>'+i.Qty+'</td><td>'+f(i.Rate)+'</td><td style="font-family:var(--fm);font-weight:700">'+f(i.Total)+'</td></tr>';}).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--tx3)">No item detail</td></tr>')+'</tbody></table></div>';
+  buildPrint(s);om('mSD');
+}
+async function delSale(id){if(!confirm('Delete this sale?'))return;try{await api('deleteSale',{SaleID:id});toast('🗑️ Deleted','ok');loadSales();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── CUSTOMERS ──
+async function loadCusts(){try{var r=await api('getCustomers');C.custs=r.data;renderCusts();}catch(e){terr('cusB',7,e.message);}}
+function renderCusts(){
+  var b=document.getElementById('cusB');if(!C.custs.length){b.innerHTML=erow(7,'No customers');return;}
+  b.innerHTML=C.custs.map(function(c){return '<tr><td><strong>'+c.Name+'</strong></td><td>'+(c.Phone||'—')+'</td><td>'+(c.Email||'—')+'</td><td style="font-size:12px;color:var(--tx2)">'+(c.Address||'—')+'</td><td style="color:var(--rd);font-family:var(--fm);font-weight:700">'+f(c.TotalDue)+'</td><td style="color:var(--gr);font-family:var(--fm)">'+f(c.TotalPaid)+'</td><td><button class="btn bo bsm" onclick="viewLed(\'customer\',\''+c.CustomerID+'\',\''+c.Name.replace(/'/g,"\\'")+'\')">📒</button> <button class="btn bg bsm" onclick="qkPay(\''+c.CustomerID+'\',\''+c.Name.replace(/'/g,"\\'")+'\',\'Customer\')">💰</button> <button class="btn bo bsm" onclick=\'openCM('+JSON.stringify(c)+')\'>✏️</button> <button class="btn br bsm" onclick="delCust(\''+c.CustomerID+'\',\''+c.Name.replace(/'/g,"\\'")+'\')">🗑️</button></td></tr>';}).join('');
+}
+function openCM(c){c=c||null;document.getElementById('mCT').textContent=c?'Edit Customer':'Add Customer';document.getElementById('ecID').value=c?c.CustomerID:'';document.getElementById('cN').value=c?c.Name||'':'';document.getElementById('cPh').value=c?c.Phone||'':'';document.getElementById('cEm').value=c?c.Email||'':'';document.getElementById('cAd').value=c?c.Address||'':'';document.getElementById('cNt').value=c?c.Notes||'':'';om('mCust');}
+async function saveCust(){
+  var id=document.getElementById('ecID').value;
+  var name=document.getElementById('cN').value.trim();
+  if(!name){toast('Name zaroori hai','error');document.getElementById('cN').focus();return;}
+  var data={CustomerID:id,Name:name,Phone:document.getElementById('cPh').value,Email:document.getElementById('cEm').value,Address:document.getElementById('cAd').value,Notes:document.getElementById('cNt').value};
+  // Check if API is set
+  if(!API){
+    toast('⚠️ Pehle Settings → API Setup mein Google Script URL daalo','error');
+    // Open settings tab
+    setTimeout(function(){WM.open('settings');},800);
+    return;
+  }
+  try{
+    var r=await api(id?'updateCustomer':'addCustomer',data);
+    toast('✅ Customer '+(id?'updated':'saved')+' successfully!','ok');
+    cm('mCust');
+    loadCusts();
+  }catch(e){
+    toast('❌ Save failed: '+e.message+' — API URL check karo','error');
+    console.error('Customer save error:',e);
+  }
+}
+async function delCust(id,name){if(!confirm('Delete "'+name+'"?'))return;try{await api('deleteCustomer',{CustomerID:id});toast('🗑️ Deleted','ok');loadCusts();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── SUPPLIERS ──
+async function loadSups(){try{var r=await api('getSuppliers');C.sups=r.data;renderSups();}catch(e){terr('supB',7,e.message);}}
+function renderSups(){
+  var b=document.getElementById('supB');if(!C.sups.length){b.innerHTML=erow(7,'No suppliers');return;}
+  b.innerHTML=C.sups.map(function(s){return '<tr><td><strong>'+s.Name+'</strong></td><td>'+(s.Phone||'—')+'</td><td>'+(s.Email||'—')+'</td><td style="font-size:12px;color:var(--tx2)">'+(s.Address||'—')+'</td><td style="color:var(--rd);font-family:var(--fm);font-weight:700">'+f(s.TotalDue)+'</td><td style="color:var(--gr);font-family:var(--fm)">'+f(s.TotalPaid)+'</td><td><button class="btn bo bsm" onclick="viewLed(\'supplier\',\''+s.SupplierID+'\',\''+s.Name.replace(/'/g,"\\'")+'\')">📒</button> <button class="btn bg bsm" onclick="qkPay(\''+s.SupplierID+'\',\''+s.Name.replace(/'/g,"\\'")+'\',\'Supplier\')">💰</button> <button class="btn bo bsm" onclick=\'openSuM('+JSON.stringify(s)+')\'>✏️</button> <button class="btn br bsm" onclick="delSup(\''+s.SupplierID+'\',\''+s.Name.replace(/'/g,"\\'")+'\')">🗑️</button></td></tr>';}).join('');
+}
+function openSuM(s){s=s||null;document.getElementById('mST').textContent=s?'Edit Supplier':'Add Supplier';document.getElementById('esID').value=s?s.SupplierID:'';document.getElementById('sN').value=s?s.Name||'':'';document.getElementById('sPh').value=s?s.Phone||'':'';document.getElementById('sEm').value=s?s.Email||'':'';document.getElementById('sAd').value=s?s.Address||'':'';document.getElementById('sNt').value=s?s.Notes||'':'';om('mSup');}
+async function saveSup(){
+  var id=document.getElementById('esID').value;
+  var name=document.getElementById('sN').value.trim();
+  if(!name){toast('Supplier name zaroori hai','error');document.getElementById('sN').focus();return;}
+  var data={SupplierID:id,Name:name,Phone:document.getElementById('sPh').value,Email:document.getElementById('sEm').value,Address:document.getElementById('sAd').value,Notes:document.getElementById('sNt').value};
+  if(!API){
+    toast('⚠️ Pehle Settings → API Setup mein Google Script URL daalo','error');
+    setTimeout(function(){WM.open('settings');},800);
+    return;
+  }
+  try{
+    var r=await api(id?'updateSupplier':'addSupplier',data);
+    toast('✅ Supplier '+(id?'updated':'saved')+' successfully!','ok');
+    cm('mSup');
+    loadSups();
+  }catch(e){
+    toast('❌ Save failed: '+e.message+' — API URL check karo','error');
+    console.error('Supplier save error:',e);
+  }
+}
+async function delSup(id,name){if(!confirm('Delete "'+name+'"?'))return;try{await api('deleteSupplier',{SupplierID:id});toast('🗑️ Deleted','ok');loadSups();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── LEDGER ──
+async function viewLed(type,pid,name){
+  document.getElementById('mLedT').textContent='📒 Ledger — '+name;
+  try{
+    var fld=type==='customer'?'CustomerID':'SupplierID';var filter={};filter[fld]=pid;
+    var tr=await api(type==='customer'?'getSales':'getPurchases',filter);
+    var pr=await api('getPayments',{PartyID:pid});
+    var txs=tr.data,pays=pr.data;
+    var tot=txs.reduce(function(a,t){return a+(Number(t.GrandTotal)||Number(t.Total)||0);},0);
+    var totP=pays.reduce(function(a,p){return a+(Number(p.Amount)||0);},0);
+    document.getElementById('lt1').textContent=f(tot);document.getElementById('lt2').textContent=f(totP);document.getElementById('lt3').textContent=f(Math.max(0,tot-totP));
+    var rows=[];
+    txs.forEach(function(t){rows.push({dt:t.Date,ds:t.SaleID||t.PurchaseID,db:Number(t.GrandTotal||t.Total),cr:0});});
+    pays.forEach(function(p){rows.push({dt:p.Date,ds:'Payment - '+p.Method,db:0,cr:Number(p.Amount)});});
+    rows.sort(function(a,b){return new Date(a.dt)-new Date(b.dt);});
+    var bal=0;
+    document.getElementById('ledB').innerHTML=rows.map(function(r){bal+=r.db-r.cr;return '<tr><td>'+r.dt+'</td><td style="font-size:12px">'+r.ds+'</td><td style="color:var(--rd);font-family:var(--fm)">'+(r.db>0?f(r.db):'—')+'</td><td style="color:var(--gr);font-family:var(--fm)">'+(r.cr>0?f(r.cr):'—')+'</td><td style="font-weight:700;font-family:var(--fm);color:'+(bal>0?'var(--rd)':'var(--gr)')+'">'+f(Math.abs(bal))+'</td></tr>';}).join('')||'<tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:20px">No transactions</td></tr>';
+    om('mLed');
+  }catch(e){toast('❌ '+e.message,'error');}
+}
+function qkPay(id,name,type){document.getElementById('pyTp').value=type;ldPayP().then(function(){document.getElementById('pyPt').value=id;setDates();om('mPay');});}
+
+// ── PAYMENTS ──
+async function loadPays(){try{var r=await api('getPayments');C.pays=r.data;renderPays();}catch(e){terr('payB',6,e.message);}}
+function renderPays(){var b=document.getElementById('payB');if(!C.pays.length){b.innerHTML=erow(6,'No payments');return;}b.innerHTML=C.pays.slice().reverse().map(function(p){return '<tr><td>'+p.Date+'</td><td><span class="bdg '+(p.Type==='Customer'?'bb2':'bo2')+'">'+p.Type+'</span></td><td><strong>'+p.PartyName+'</strong></td><td style="font-family:var(--fm);font-weight:700;color:var(--gr)">'+f(p.Amount)+'</td><td>'+p.Method+'</td><td style="font-size:12px;color:var(--tx2)">'+(p.Notes||'—')+'</td></tr>';}).join('');}
+function openPayM(){setDates();ldPayP().then(function(){om('mPay');});}
+async function ldPayP(){var type=document.getElementById('pyTp').value;var sel=document.getElementById('pyPt');sel.innerHTML='<option value="">-- Select --</option>';var isCust=type==='Customer';var list=isCust?C.custs:C.sups;if(!list.length&&API){try{var r=await api(isCust?'getCustomers':'getSuppliers');list=r.data;if(isCust)C.custs=list;else C.sups=list;}catch(e){}}list.forEach(function(p){var o=document.createElement('option');o.value=isCust?p.CustomerID:p.SupplierID;o.setAttribute('data-n',p.Name);o.textContent=p.Name+' — Due: '+f(p.TotalDue);sel.appendChild(o);});}
+async function savePay(){var sel=document.getElementById('pyPt');if(!sel.value){toast('Select party','error');return;}var amt=Number(document.getElementById('pyAm').value);if(!amt){toast('Enter amount','error');return;}var pn=sel.options[sel.selectedIndex].getAttribute('data-n');try{await api('addPayment',{Type:document.getElementById('pyTp').value,PartyID:sel.value,PartyName:pn,Amount:amt,Method:document.getElementById('pyMt').value,Date:document.getElementById('pyDt').value,Notes:document.getElementById('pyNt').value});toast('✅ Payment saved!','ok');cm('mPay');loadPays();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── EXPENSES ──
+async function loadExps(){try{var r=await api('getExpenses');C.exps=r.data;renderExps();}catch(e){terr('expB',4,e.message);}}
+function renderExps(){var b=document.getElementById('expB');if(!C.exps.length){b.innerHTML=erow(4,'No expenses');return;}b.innerHTML=C.exps.slice().reverse().map(function(e){return '<tr><td>'+e.Date+'</td><td><span class="bdg bgy">'+e.Category+'</span></td><td>'+(e.Description||'—')+'</td><td style="font-family:var(--fm);font-weight:700;color:var(--rd)">'+f(e.Amount)+'</td></tr>';}).join('');}
+function openExpM(){setDates();om('mExp');}
+async function saveExp(){var amt=Number(document.getElementById('exAm').value);if(!amt){toast('Enter amount','error');return;}try{await api('addExpense',{Category:document.getElementById('exCt').value,Description:document.getElementById('exDs').value,Amount:amt,Date:document.getElementById('exDt').value});toast('✅ Saved!','ok');cm('mExp');loadExps();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── P&L ──
+async function loadPL(){
+  var mo=document.getElementById('plM').value;if(!mo)return;
+  try{
+    var sR=await api('getSales'),eR=await api('getExpenses'),iR=await api('getItems');
+    var sales=sR.data.filter(function(s){return String(s.Date).startsWith(mo);});
+    var exps=eR.data.filter(function(e){return String(e.Date).startsWith(mo);});
+    var items=iR.data;
+    var rev=sales.reduce(function(a,s){return a+(Number(s.GrandTotal)||0);},0);
+    var totExp=exps.reduce(function(a,e){return a+(Number(e.Amount)||0);},0);
+    var im={};items.forEach(function(i){im[i.ItemID]=Number(i.PurchaseRate)||0;});
+    var mids=new Set(sales.map(function(s){return s.SaleID;}));
+    var allSI=sR.data.flatMap(function(s){return s.items||[];});
+    var svcRev=allSI.filter(function(si){return mids.has(si.SaleID)&&(si.ItemType==='Service'||si.IT==='Service');}).reduce(function(a,si){return a+(Number(si.Total)||0);},0);
+    var cogs=allSI.filter(function(si){return mids.has(si.SaleID)&&si.ItemType!=='Service'&&si.IT!=='Service';}).reduce(function(a,si){return a+((Number(si.Qty)||0)*(im[si.ItemID]||0));},0);
+    var gross=rev-cogs;var net=gross-totExp;var margin=rev>0?((net/rev)*100).toFixed(1):0;
+    document.getElementById('pl1').textContent=f(rev);document.getElementById('pl2').textContent=f(cogs);document.getElementById('pl3').textContent=f(svcRev);document.getElementById('pl4').textContent=f(totExp);document.getElementById('pl5').textContent=f(gross);document.getElementById('pl6').textContent=f(net);document.getElementById('pl6').style.color=net>=0?'var(--gr)':'var(--rd)';document.getElementById('pl7').textContent='Margin: '+margin+'%';
+  }catch(e){toast('❌ '+e.message,'error');}
+}
+
+// ── SERVICES ──
+async function loadSvcs(){try{var r=await api('getServices');C.svcs=r.data;renderSvcs();}catch(e){terr('svcB',12,e.message);}}
+function renderSvcs(){
+  var b=document.getElementById('svcB');if(!C.svcs.length){b.innerHTML=erow(12,'No job cards');return;}
+  var sc={Pending:'bo2','In Progress':'bb2',Completed:'bg2',Delivered:'bgy'};
+  b.innerHTML=C.svcs.slice().reverse().map(function(s){return '<tr><td style="font-family:var(--fm);font-size:11px;font-weight:700">'+s.JobID+'</td><td>'+s.Date+'</td><td><strong>'+s.CustomerName+'</strong></td><td>'+(s.Phone||'—')+'</td><td>'+(s.DeviceType||'—')+(s.Model?' / '+s.Model:'')+'</td><td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px">'+(s.Problem||'—')+'</td><td><span class="bdg '+(sc[s.Status]||'bgy')+'">'+s.Status+'</span></td><td style="font-family:var(--fm)">'+f(s.Charges)+'</td><td style="font-family:var(--fm);color:var(--gr)">'+f(s.Advance)+'</td><td style="font-family:var(--fm);color:var(--rd)">'+f(s.Due)+'</td><td style="color:var(--tx2)">'+(s.DeliveryDate||'—')+'</td><td><button class="btn bo bsm" onclick=\'openSvcM('+JSON.stringify(s)+')\'>✏️</button></td></tr>';}).join('');
+}
+function openSvcM(s){s=s||null;document.getElementById('mSvcT').textContent=s?'Update Job Card':'New Job Card';document.getElementById('ejID').value=s?s.JobID:'';document.getElementById('jCN').value=s?s.CustomerName||'':'';document.getElementById('jPh').value=s?s.Phone||'':'';document.getElementById('jDv').value=s?s.DeviceType||'':'';document.getElementById('jMo').value=s?s.Model||'':'';document.getElementById('jPr').value=s?s.Problem||'':'';document.getElementById('jSt').value=s?s.Status||'Pending':'Pending';document.getElementById('jDD').value=s?s.DeliveryDate||'':'';document.getElementById('jCh').value=s?s.Charges||0:0;document.getElementById('jAd').value=s?s.Advance||0:0;document.getElementById('jTN').value=s?s.TechnicianNotes||'':'';om('mSvc');}
+async function saveSvc(){var id=document.getElementById('ejID').value;var name=document.getElementById('jCN').value.trim();if(!name){toast('Customer name required','error');return;}try{await api(id?'updateService':'addService',{JobID:id,CustomerName:name,Phone:document.getElementById('jPh').value,DeviceType:document.getElementById('jDv').value,Model:document.getElementById('jMo').value,Problem:document.getElementById('jPr').value,Status:document.getElementById('jSt').value,DeliveryDate:document.getElementById('jDD').value,Charges:document.getElementById('jCh').value,Advance:document.getElementById('jAd').value,TechnicianNotes:document.getElementById('jTN').value});toast('✅ Job card '+(id?'updated':'created'),'ok');cm('mSvc');loadSvcs();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── STAFF ──
+async function loadStf(){try{var r=await api('getStaff');C.stf=r.data;renderStf();}catch(e){terr('stfB',7,e.message);}}
+function renderStf(){var b=document.getElementById('stfB');if(!C.stf.length){b.innerHTML=erow(7,'No staff');return;}var rc={Admin:'br2',Manager:'bo2',Cashier:'bb2','Stock Manager':'bg2'};b.innerHTML=C.stf.map(function(s){return '<tr><td><strong>'+s.Name+'</strong></td><td>'+(s.Phone||'—')+'</td><td><span class="bdg '+(rc[s.Role]||'bgy')+'">'+s.Role+'</span></td><td style="font-family:var(--fm);font-size:12px">'+s.Username+'</td><td style="font-size:11px;color:var(--tx2)">'+(RDESC[s.Role]||'—')+'</td><td><span class="bdg '+(s.Active?'bg2':'br2')+'">'+(s.Active?'Active':'Inactive')+'</span></td><td><button class="btn bo bsm" onclick=\'openStfM('+JSON.stringify(s)+')\'>✏️</button> <button class="btn br bsm" onclick="delStf(\''+s.StaffID+'\',\''+s.Name.replace(/'/g,"\\'")+'\')">🗑️</button></td></tr>';}).join('');}
+function openStfM(s){s=s||null;document.getElementById('mStfT').textContent=s?'Edit Staff':'Add Staff';document.getElementById('estID').value=s?s.StaffID:'';document.getElementById('stN').value=s?s.Name||'':'';document.getElementById('stPh').value=s?s.Phone||'':'';document.getElementById('stRl').value=s?s.Role||'Cashier':'Cashier';document.getElementById('stUn').value=s?s.Username||'':'';document.getElementById('stPw').value='';document.getElementById('stAc').value=String(s?s.Active!==false:true);showRI();om('mStf');}
+function showRI(){var role=document.getElementById('stRl').value;var a=ROLES[role]||[];var pgs=a.includes('*')?Object.keys(WM.cfg):a;document.getElementById('rInfo').innerHTML='<strong>'+role+':</strong> '+RDESC[role]+'<br><div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:3px">'+pgs.map(function(p){return '<span class="bdg bg2">'+(WM.cfg[p]?WM.cfg[p].ico+' ':'')+p+'</span>';}).join('')+'</div>';}
+async function saveStf(){var id=document.getElementById('estID').value;var name=document.getElementById('stN').value.trim();var un=document.getElementById('stUn').value.trim();var pw=document.getElementById('stPw').value;if(!name||!un){toast('Name and username required','error');return;}if(!id&&!pw){toast('Password required for new staff','error');return;}try{await api(id?'updateStaff':'addStaff',{StaffID:id,Name:name,Phone:document.getElementById('stPh').value,Role:document.getElementById('stRl').value,Username:un,Password:pw,Active:document.getElementById('stAc').value==='true'});toast('✅ Staff '+(id?'updated':'added'),'ok');cm('mStf');loadStf();}catch(e){toast('❌ '+e.message,'error');}}
+async function delStf(id,name){if(!confirm('Delete "'+name+'"?'))return;try{await api('deleteStaff',{StaffID:id});toast('🗑️ Deleted','ok');loadStf();}catch(e){toast('❌ '+e.message,'error');}}
+
+// ── MARKETING ──
+async function loadMkt(){
+  if(!C.custs.length&&API){try{var r=await api('getCustomers');C.custs=r.data;}catch(e){}}
+  var wn=C.custs.filter(function(c){return c.Phone;});
+  document.getElementById('mktC').textContent=wn.length+' customers with phone';
+  var b=document.getElementById('mktB');
+  b.innerHTML=C.custs.map(function(c){return '<tr><td><strong>'+c.Name+'</strong></td><td style="font-family:var(--fm)">'+(c.Phone||'—')+'</td><td>'+(c.Email||'—')+'</td><td style="font-family:var(--fm)">'+f(c.TotalPaid)+'</td><td style="font-family:var(--fm);color:var(--rd)">'+f(c.TotalDue)+'</td></tr>';}).join('')||erow(5,'No customers');
+}
+function copyWA(){var nums=C.custs.filter(function(c){return c.Phone;}).map(function(c){return c.Phone.trim().replace(/\s/g,'');}).join('\n');document.getElementById('waBox').value=nums;navigator.clipboard.writeText(nums).then(function(){toast('✅ '+C.custs.filter(function(c){return c.Phone;}).length+' numbers copied!','ok');}).catch(function(){toast('📋 Numbers in box below','info');});}
+function copyEm(){var emails=C.custs.filter(function(c){return c.Email;}).map(function(c){return c.Email;}).join('\n');if(!emails){toast('No emails found','warn');return;}navigator.clipboard.writeText(emails).then(function(){toast('✅ Emails copied!','ok');}).catch(function(){});}
+function cpyBox(){var v=document.getElementById('waBox').value;if(!v){copyWA();return;}navigator.clipboard.writeText(v).then(function(){toast('✅ Copied!','ok');}).catch(function(){});}
+
+// ── SETTINGS ──
+function saveApi(){var url=document.getElementById('apiUrl').value.trim();if(!url){toast('Enter URL','error');return;}API=url;svcook('au',url);toast('✅ API URL saved!','ok');}
+async function testApi(){var el=document.getElementById('apiRes');el.innerHTML='⏳ Testing...';try{await api('getDashboard');el.innerHTML='<span style="color:var(--gr)">✅ Connected!</span>';}catch(e){el.innerHTML='<span style="color:var(--rd)">❌ Failed: '+e.message+'</span>';}}
+async function initSh(){try{var r=await api('initSheets');toast('✅ '+r.message,'ok');}catch(e){toast('❌ '+e.message,'error');}}
+function saveSets(){BIZ.name=document.getElementById('s-bn').value||'SHAH Group';BIZ.addr=document.getElementById('s-ad').value;BIZ.tel=document.getElementById('s-ph').value;CUR=document.getElementById('s-cu').value||'Rs.';document.getElementById('bizN').textContent=BIZ.name;svcook('biz',JSON.stringify(BIZ));svcook('cur',CUR);toast('✅ Settings saved!','ok');}
+async function dlBkp(){
+  var pin=document.getElementById('bkpPin').value.trim();
+  if(!pin){toast('Enter PIN to download backup','error');document.getElementById('bkpPin').focus();return;}
+  if(pin!==SEC.BACKUP_PIN){toast('❌ Wrong PIN! Backup not allowed.','error');document.getElementById('bkpPin').value='';document.getElementById('bkpPin').focus();return;}
+  document.getElementById('bkpPin').value='';
+  toast('⏳ Generating backup...','info');
+  try{
+    var r=await api('getBackup');
+    var blob=new Blob([JSON.stringify(r.data,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='SHAH_Group_Backup_'+(new Date().toISOString().slice(0,10))+'.json';a.click();
+    toast('✅ Backup downloaded!','ok');
+  }catch(e){toast('❌ '+e.message,'error');}
+}
+async function rstBkp(){
+  var pin=document.getElementById('rstPin').value.trim();
+  if(!pin){toast('Enter PIN to restore backup','error');document.getElementById('rstPin').focus();return;}
+  if(pin!==SEC.BACKUP_PIN){toast('❌ Wrong PIN! Restore not allowed.','error');document.getElementById('rstPin').value='';return;}
+  document.getElementById('rstPin').value='';
+  var file=document.getElementById('bkpF').files[0];
+  if(!file){toast('Select backup file','warn');return;}
+  if(!confirm('⚠️ This will OVERWRITE ALL data!\nAre you absolutely sure?'))return;
+  var reader=new FileReader();
+  reader.onload=async function(e){
+    try{var backup=JSON.parse(e.target.result);await api('restoreBackup',{backup:backup});toast('✅ Data restored successfully!','ok');}
+    catch(err){toast('❌ '+err.message,'error');}
+  };
+  reader.readAsText(file);
+}
+
+// ── Change Admin Password ──
+function changeAdminPass(){
+  var cur=document.getElementById('secCurPass').value;
+  var nw=document.getElementById('secNewPass').value;
+  var cf=document.getElementById('secConfPass').value;
+  if(!cur||!nw||!cf){toast('Fill all password fields','error');return;}
+  if(cur!==SEC.ADMIN_PASS&&cur!==DP.admin){toast('❌ Current password is wrong','error');return;}
+  if(nw.length<6){toast('New password must be at least 6 characters','error');return;}
+  if(nw!==cf){toast('❌ New passwords do not match','error');return;}
+  SEC.ADMIN_PASS=nw;DP.admin=nw;
+  svcook('admpw',nw);
+  document.getElementById('secCurPass').value='';
+  document.getElementById('secNewPass').value='';
+  document.getElementById('secConfPass').value='';
+  toast('✅ Password changed successfully!','ok');
+}
+
+// ── Change Backup PIN ──
+function changeBackupPin(){
+  var cur=document.getElementById('secCurPin').value;
+  var nw=document.getElementById('secNewPin').value;
+  var cf=document.getElementById('secConfPin').value;
+  if(!cur||!nw||!cf){toast('Fill all PIN fields','error');return;}
+  if(cur!==SEC.BACKUP_PIN){toast('❌ Current PIN is wrong','error');return;}
+  if(!/^\d{4}$/.test(nw)){toast('PIN must be exactly 4 digits (0-9)','error');return;}
+  if(nw!==cf){toast('❌ New PINs do not match','error');return;}
+  SEC.BACKUP_PIN=nw;
+  svcook('bkppin',nw);
+  document.getElementById('secCurPin').value='';
+  document.getElementById('secNewPin').value='';
+  document.getElementById('secConfPin').value='';
+  toast('✅ Backup PIN changed successfully!','ok');
+}
+
+// ── PRINT ──
+function buildPrint(s){
+  document.getElementById('p-biz').textContent=BIZ.name||'SHAH Group';
+  document.getElementById('p-biz2').textContent=BIZ.name||'SHAH Group';
+  document.getElementById('p-addr').textContent=BIZ.addr||'';
+  document.getElementById('p-tel').textContent=BIZ.tel||'';
+  document.getElementById('p-id').textContent=s.SaleID||'—';
+  document.getElementById('p-dt').textContent=s.Date||'—';
+  document.getElementById('p-cu').textContent=s.CustomerName||'Walk-in';
+  document.getElementById('p-tp').textContent=s.Type||'—';
+  document.getElementById('p-gt').textContent=f(s.GrandTotal||0);
+  document.getElementById('p-pd').textContent=f(s.Paid||0);
+  document.getElementById('p-du').textContent=f(s.Due||0);
+  document.getElementById('p-its').innerHTML=(s.items||[]).map(function(i){return '<tr><td>'+i.ItemName+'</td><td>'+i.Qty+'</td><td>'+f(i.Rate)+'</td><td>'+f(i.Total)+'</td></tr>';}).join('');
+}
+
+// ── HELPERS ──
+function om(id){document.getElementById(id).classList.add('on');}
+function cm(id){document.getElementById(id).classList.remove('on');}
+function stab(n){
+  document.querySelectorAll('.tabb').forEach(function(b){b.classList.remove('act');});
+  document.querySelectorAll('.tabp').forEach(function(p){p.classList.remove('act');});
+  document.querySelector('[onclick="stab(\''+n+'\')"]').classList.add('act');
+  document.getElementById('tab-'+n).classList.add('act');
+}
+function ftb(bid,q){document.getElementById(bid).querySelectorAll('tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none';});}
+function toggleDark(){isDk=!isDk;document.body.classList.toggle('dark',isDk);document.getElementById('dkBtn').textContent=isDk?'☀️':'🌙';svcook('dk',isDk?'1':'');}
+function toggleLang(){lng=lng==='en'?'ur':'en';document.getElementById('langBtn').textContent=lng==='en'?'🌐 اردو':'🌐 English';svcook('lng',lng);toast(lng==='ur'?'✅ Urdu Roman mode':'✅ English mode','info');}
+function toast(msg,type){type=type||'info';var c=document.getElementById('tc');var el=document.createElement('div');var cls={ok:'tok',error:'ter',warn:'twn',info:'tin2'};el.className='tst '+(cls[type]||'tin2');el.textContent=msg;c.appendChild(el);setTimeout(function(){el.style.opacity='0';el.style.transform='translateX(100px)';el.style.transition='all .3s';setTimeout(function(){el.remove();},300);},3500);}
+function f(v){return CUR+' '+(Number(v)||0).toLocaleString('en-PK',{maximumFractionDigits:0});}
+function erow(c,m){return '<tr><td colspan="'+c+'"><div class="emp"><div class="ei">📂</div><p>'+m+'</p></div></td></tr>';}
+function terr(bid,c,m){document.getElementById(bid).innerHTML='<tr><td colspan="'+c+'"><div class="emp"><div class="ei">⚠️</div><p>Error: '+m+'<br><small>Set API URL in Settings → API Setup</small></p></div></td></tr>';}
+function svcook(k,v){document.cookie=k+'='+encodeURIComponent(v)+';path=/;max-age=31536000';}
+function gcook(k){var c=document.cookie.split(';').find(function(x){return x.trim().startsWith(k+'=');});return c?decodeURIComponent(c.split('=')[1]):null;}
+function setDates(){var t=new Date().toISOString().slice(0,10);['pDate','pyDt','exDt'].forEach(function(id){var e=document.getElementById(id);if(e&&!e.value)e.value=t;});}
+
+// ══════════════════════════════════════════════
+// SHAH GROUP LOGO — Global function
+// Draws animated dot-spiral logo on any canvas
+// ══════════════════════════════════════════════
+function drawShahLogo(canvasEl,size,onDone){
+  if(!canvasEl)return;
+  canvasEl.width=size;canvasEl.height=size;
+  var ctx=canvasEl.getContext('2d');
+  var cx=size/2,cy=size/2,sc=size/260;
+  var rings=[{r:38,sz:4,cnt:8},{r:60,sz:6,cnt:11},{r:84,sz:8,cnt:13},{r:110,sz:10,cnt:15}];
+  function getClr(t){
+    var cs=[[0,[0,130,255]],[.35,[0,195,220]],[.65,[0,210,150]],[1,[10,180,55]]];
+    for(var i=0;i<cs.length-1;i++){
+      var t0=cs[i][0],c0=cs[i][1],t1=cs[i+1][0],c1=cs[i+1][1];
+      if(t>=t0&&t<=t1){var f=(t-t0)/(t1-t0);return 'rgb('+Math.round(c0[0]+(c1[0]-c0[0])*f)+','+Math.round(c0[1]+(c1[1]-c0[1])*f)+','+Math.round(c0[2]+(c1[2]-c0[2])*f)+')';}
+    }return 'rgb(10,180,55)';
+  }
+  var dots=[];
+  rings.forEach(function(rng){
+    for(var i=0;i<rng.cnt;i++){
+      var t=i/(rng.cnt-1),ang=(100+(348-100)*t)*Math.PI/180;
+      dots.push({x:cx+rng.r*sc*Math.cos(ang),y:cy+rng.r*sc*Math.sin(ang),sz:rng.sz*sc,color:getClr(t)});
+    }
+  });
+  dots.sort(function(a,b){return Math.atan2(a.y-cy,a.x-cx)-Math.atan2(b.y-cy,b.x-cx);});
+  var frame=0,total=80,dd=total/dots.length;
+  function anim(){
+    ctx.clearRect(0,0,size,size);
+    dots.forEach(function(d,i){
+      var sf=i*dd*0.6,p=Math.min(1,Math.max(0,(frame-sf)/12));
+      if(p>0){var s=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;ctx.beginPath();ctx.arc(d.x,d.y,d.sz*s,0,Math.PI*2);ctx.globalAlpha=p;ctx.fillStyle=d.color;ctx.fill();ctx.globalAlpha=1;}
+    });
+    frame++;
+    if(frame<total+30){requestAnimationFrame(anim);}
+    else{
+      ctx.clearRect(0,0,size,size);
+      dots.forEach(function(d){ctx.beginPath();ctx.arc(d.x,d.y,d.sz,0,Math.PI*2);ctx.fillStyle=d.color;ctx.fill();});
+      if(onDone)onDone();
+    }
+  }
+  anim();
+}
+
+window.addEventListener('load',function(){
+
+  // Big logo on splash screen → then show login
+  drawShahLogo(document.getElementById('splCanvas'),220,function(){
+    setTimeout(function(){
+      var spl=document.getElementById('splash');
+      if(spl){spl.classList.add('hide');setTimeout(function(){spl.style.display='none';},700);}
+      // Small logo inside login box
+      setTimeout(function(){drawShahLogo(document.getElementById('loginCanvas'),58,null);},200);
+    },500);
+  });
+
+  // Sidebar logo drawn after login (called from showApp)
+
+  // ══ LOAD SAVED SETTINGS ══
+  // API URL: pehle hardcoded default, phir cookie (agar user ne Settings mein change ki ho)
+  var u=gcook('au');
+  if(u){API=u;document.getElementById('apiUrl').value=u;}
+  else if(DEFAULT_API){API=DEFAULT_API;document.getElementById('apiUrl').value=DEFAULT_API;}
+  var dk=gcook('dk');if(dk){isDk=true;document.body.classList.add('dark');document.getElementById('dkBtn').textContent='☀️';}
+  var lg=gcook('lng');if(lg){lng=lg;document.getElementById('langBtn').textContent=lg==='ur'?'🌐 English':'🌐 اردو';}
+  try{var bj=gcook('biz');if(bj){BIZ=JSON.parse(bj);document.getElementById('bizN').textContent=BIZ.name;document.getElementById('s-bn').value=BIZ.name;document.getElementById('s-ad').value=BIZ.addr;document.getElementById('s-ph').value=BIZ.tel;}}catch(e){}
+  var cu=gcook('cur');if(cu){CUR=cu;document.getElementById('s-cu').value=cu;}
+  // Load saved security settings
+  var sp=gcook('admpw');if(sp){SEC.ADMIN_PASS=sp;DP.admin=sp;}
+  var sn=gcook('bkppin');if(sn){SEC.BACKUP_PIN=sn;}
+  // Month selector
+  var sel=document.getElementById('plM');var now=new Date();
+  for(var i=0;i<12;i++){var d=new Date(now.getFullYear(),now.getMonth()-i,1);var v=d.toISOString().slice(0,7);var o=document.createElement('option');o.value=v;o.textContent=d.toLocaleString('default',{month:'long',year:'numeric'});if(i===0)o.selected=true;sel.appendChild(o);}
+});
+</script></body></html>
